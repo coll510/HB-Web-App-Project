@@ -116,10 +116,10 @@ def find_danceclasses():
     data = response.json()
     #print(data)
 
-    if response.ok:
-        classes = data['events']
-        print(classes)
-        print(classes[0])
+    # if response.ok:
+    #     classes = data['events']
+    #     print(classes)
+    #     print(classes[0])
         
         # or do I specify here the specific data to print?
 
@@ -128,8 +128,7 @@ def find_danceclasses():
     #     classes = []
 
     return render_template("/search-results.html", 
-                            data=pformat(data),
-                            results=classes)
+                            data=pformat(data))
 
 # else: 
 #     flash("Please complete the required information.")
