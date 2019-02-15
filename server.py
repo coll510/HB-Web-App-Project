@@ -22,24 +22,13 @@ USER_ID = os.environ.get('EVENTBRITE_USER_ID')
 #my eventbrite user id
 
 AUTH_HEADER = {"token": EVENTBRITE_TOKEN}
-#AUTH_HEADER = {'Authorization': 'Bearer ' + EVENTBRITE_TOKEN}
 
 
-# i will need to parse the json data that I get from eventbrite's api, set a
-#variable or variables that I want to use for the data, and send it to a diff
-#html form so that it displays to the user. So practice printing the json 
-#data from the balloonicorn server.py file to see an example of how it's
-#received, etc. Check lines 61 - 66 of that file.
 
 @app.route("/")
 def homepage():
     """Show homepage."""
-    # query = {"q": f"dance class salsa", 
-    #                 "location.address": "berkeley"
-    #             }
-    # response = requests.get("https://www.eventbriteapi.com/v3/events/search/?q={}".format(query), 
-    #                         headers=AUTH_HEADER)
-    # print(response.json())
+   
     return render_template("homepage.html")
 
 @app.route("/danceclass-search")
@@ -85,7 +74,7 @@ def find_danceclasses():
                     "sort_by": sort, 
                     "start_date.keyword": time,
                     "token": EVENTBRITE_TOKEN}
-
+        # style is not pulling into query
         
 
     else:
@@ -97,42 +86,34 @@ def find_danceclasses():
                     "token": EVENTBRITE_TOKEN}
 
 
-    # response = requests.get("https://www.eventbriteapi.com/v3/events/search/?q={}".format(payload), 
-    #                         headers=AUTH_HEADER)
-
     response = requests.get("https://www.eventbriteapi.com/v3/events/search/", params=payload) 
-                            # headers=AUTH_HEADER)
+                           
     print("search url")   
     print(response.url)
-    # (EVENTBRITE_URL + "events/search", 
-    #                         params = payload, 
-    #                         headers=AUTH_HEADER)
+
 
     data = response.json()
     events = data['events']
     pprint(data)
     #import pdb; pdb.set_trace()
 
-    # if response.ok:
-    #     classes = data['events']
-    #     print(classes)
-    #     print(classes[0])
-        
-        # or do I specify here the specific data to print?
+    if response.ok:
+        classes = data['events']
+       
 
     # else: 
     #     flash(f"No classes: {data['error_description']}")
     #     classes = []
+    # need to add an elif/else statement for if there are no results
+
 
     return render_template("/search-results.html", 
                             events=events)
-    #passing in data (json response) returns the entire api listing for that event.
-    #perhaps here I should just pass in the specific things I want like name, url, 
-    #etc. Then write in the jinja info {{ name}} in my html file.
+   
 
-# else: 
-#     flash("Please complete the required information.")
-#     return redirect("/danceclass-search")
+    # else: 
+    #     flash("Please complete the required information.")
+    #     return redirect("/danceclass-search")
 
 
 
