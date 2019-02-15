@@ -1,4 +1,4 @@
-from pprint import pformat
+from pprint import pprint
 import os
 #os is python's os module
 #pretty print and pretty format
@@ -23,7 +23,7 @@ USER_ID = os.environ.get('EVENTBRITE_USER_ID')
 
 AUTH_HEADER = {"token": EVENTBRITE_TOKEN}
 #AUTH_HEADER = {'Authorization': 'Bearer ' + EVENTBRITE_TOKEN}
-print(AUTH_HEADER)
+
 
 # i will need to parse the json data that I get from eventbrite's api, set a
 #variable or variables that I want to use for the data, and send it to a diff
@@ -54,20 +54,15 @@ def find_danceclasses():
 
     #ipdb.set_trace()
     location = request.args.get("city")
-    print(location)
     #print(dir(requests))
     #yellow/city is the name in my html file
     distance = request.args.get("distance")
-    print(distance)
     sort = request.args.get("sort")
-    print(sort)
     style = request.args.get("style")
-    print(style)
     if distance:
         distance = distance + "mi"
-    print(distance)
     time = request.args.get("time")
-    print(time)
+
 
 
     if location and distance:
@@ -114,7 +109,9 @@ def find_danceclasses():
     #                         headers=AUTH_HEADER)
 
     data = response.json()
-    #print(data)
+    events = data['events']
+    pprint(data)
+    #import pdb; pdb.set_trace()
 
     # if response.ok:
     #     classes = data['events']
@@ -128,7 +125,10 @@ def find_danceclasses():
     #     classes = []
 
     return render_template("/search-results.html", 
-                            data=pformat(data))
+                            events=events)
+    #passing in data (json response) returns the entire api listing for that event.
+    #perhaps here I should just pass in the specific things I want like name, url, 
+    #etc. Then write in the jinja info {{ name}} in my html file.
 
 # else: 
 #     flash("Please complete the required information.")
