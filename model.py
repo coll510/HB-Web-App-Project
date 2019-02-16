@@ -48,7 +48,7 @@ class UserClass(db.Model):
     class_saved = db.Column(db.String(100))
     class_attended = db.Column(db.String(100))
 
-    #human = db.relationship("Human", backref="humans") Put backrefs here?
+    user = db.relationship("User", backref="userClasses") 
 
     def __repr__(self):
         return "<User class id = {userClass_id} user id = {user_id} class id = {class_id} class_saved = {class_saved} class_attended = {class_attended}>".format(

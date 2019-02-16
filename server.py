@@ -54,31 +54,39 @@ def find_danceclasses():
 
 
 
-    if location and distance:
- 
+    
+        #yellow - api params to get
+    if location and style and distance:
+        # search by dance style, location and distance  
+        payload = {"q": f"dance class {style}", 
+                    "location.address": location,
+                    "location.within" : distance,
+                    "sort_by": sort, 
+                    "start_date.keyword": time,
+                    "token": EVENTBRITE_TOKEN}
+        
 
+    elif location and style:
+        # search by dance style and location 
+        payload = {"q": f"dance class {style}", 
+                    "location.address": location,
+                    "sort_by": sort, 
+                    "start_date.keyword": time,
+                    "token": EVENTBRITE_TOKEN}
+    
+    elif location and distance:
+ 
+        #search any dance class by location and distance
         payload = {"q": "dance class", 
                     "location.address" : location, 
                     "location.within" : distance,
                     "sort_by" : sort,
                     "start_date.keyword": time,
                     "token": EVENTBRITE_TOKEN}
-        #yellow - api params to get
 
-        
-
-    elif location and style:
-        # search by dance style in the query 
-        payload = {"q": f"dance class {style}", 
-                    "location.address": location,
-                    "sort_by": sort, 
-                    "start_date.keyword": time,
-                    "token": EVENTBRITE_TOKEN}
-        # style is not pulling into query
-        
-
+    
     else:
-        #general query search of "dance class"
+        #general query search of "dance class" by location
         payload = {"q": "dance class",
                     "location.address": location,
                     "sort_by": sort,
@@ -97,19 +105,33 @@ def find_danceclasses():
     pprint(data)
     #import pdb; pdb.set_trace()
 
-    if response.ok:
+    #Redirect to search page if results are empty.
+    if response.ok and events == []:
+        flash("Your search result didn't return any classes. Please search again.")
+        return redirect("/danceclass-search")
+
+    #Return results
+    elif response.ok:
         classes = data['events']
        
 
-    # else: 
-    #     flash(f"No classes: {data['error_description']}")
+    else: 
+        flash(f"No classes: {data['error_description']}")
     #     classes = []
-    # need to add an elif/else statement for if there are no results
+    # need to add an elif/else statement for if there are no result
 
 
     return render_template("/search-results.html", 
                             events=events)
    
+    # if events == None and response.ok: 
+    #     flash(f"Your search result didn't return any classes.")
+
+    # return redirect("/danceclass-search")
+    #figure out this logic and place it above response.ok so that it doesn't
+    #automatically return the empty page
+
+    
 
     # else: 
     #     flash("Please complete the required information.")
