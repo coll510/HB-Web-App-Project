@@ -9,7 +9,7 @@
     <h1>Search Results</h1>
     <ul class = "results">
 
-      </ul>
+    </ul>
   </div>
 
    
@@ -17,19 +17,20 @@
 
     {% for event in events %}
 
-    <li>{{ event.name.text}}
+      <li>{{ event.name.text}}
     <br>
-    {{event.start.local}}
-     <br>
-    {{event.end.local}}
-      <br>
-      <br>
-   <a href= event.url> 
- -->{{event.url}}</li>
+        {{event.start.local[5:7]}}/{{event.start.local[8:10]}}/{{event.start.local[:4]}}
+        Time {{event.start.local[11:16]}}
+    <br>
+        {{event.end.local}}
+    <br>
+    <br>
+      <a href= {{event.url}} target="_blank"> 
+        -->Event link here</a></li>
 
-     <br>
-     <br>
+    <br>
+    <br>
     {% endfor %}
 
 
-  {% endblock %}
+{% endblock %}

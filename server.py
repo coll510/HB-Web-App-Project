@@ -4,10 +4,11 @@ import os
 #pretty print and pretty format
 
 import requests
-from flask import Flask, render_template, request, flash, redirect, jsonify
+from flask import Flask, render_template, request, flash, redirect, jsonify, session
 from flask_debugtoolbar import DebugToolbarExtension
 #import ipdb 
 from datetime import datetime
+from model import connect_to_db, db, User, Class, UserClass
 
 
 app = Flask(__name__)
@@ -48,7 +49,7 @@ def find_danceclasses():
         distance = distance + "mi"
     time = request.args.get("time")
 
-    # date_time_str = ' '  
+    # date_time_str = '2019-02-24T09:00:00' 
     # date_time_obj = datetime.strptime(date_time_str, '%Y-%m-%d %H:%M:%S.%f')
     # #imported datetime and started process to convert api date to human readable
     #format
@@ -134,7 +135,67 @@ def find_danceclasses():
     #     return redirect("/danceclass-search")
 
 
+@app.route('/register', methods = ['GET'])
+def registration_form():
+    """Show registration form to user to sign up to access more features."""
 
+    return render_template("registration_form.html")
+
+@app.route('/register', methods = ['POST'])
+def complete_registration():
+    """Process user's registration to app"""
+
+    #get form variables and add user to database
+
+    name = request.form["name"]
+    email = request.form["email"]
+    password = request.form["password"]
+
+    new_user = User(name=name, email=email, password=password)
+
+    db.session.add(new_user)
+    db.session.commit()
+
+    flash(f"Welcome {name}. Add catchphrase or something.")
+    return redirect("/danceclass-search")
+
+@app.route('/login', methods = ['GET'])
+def login_form():
+    """Show login form to user."""
+
+    return render_template("login_form.html")
+
+@app.route('/login', methods = ['POST'])
+def complete_login():
+    """Log user in."""
+
+    #Get variables from form and log user in to app.
+
+    email = request.form["email"]
+    password = request.form["password"]
+    #find the user in the database
+    user = User.query.filter_by(email=email).first()
+
+    if not user:
+        flash("Please register to be able to login.")
+        return redirect('/login')
+
+    if user.password != password:
+        flash("Incorrect password")
+        return redirect('/login')
+
+    session["user_id"] = user.user_id
+
+    flash("Logged in")
+    return redirect("danceclass-search")
+
+@app.route('/logout')
+def logout():
+    """Log out."""
+
+    del session["user_id"]
+    flash("Logged Out.")
+    return redirect("/")
 
 
 

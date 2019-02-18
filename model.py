@@ -12,17 +12,16 @@ class User(db.Model):
 
 
     user_id = db.Column(db.Integer, primary_key = True, autoincrement = True)
-    user_name = db.Column(db.String(60), nullable = False, unique=True)
-    email = db.Column(db.String(60), nullable = False, unique=True)
+    user_name = db.Column(db.String(64), nullable = False, unique=True)
+    email = db.Column(db.String(64), nullable = False, unique=True)
+    password = db.Column(db.String(64), nullable = False)
 
-    # def __repr__(self):
-    #     return "<User id = {user_id} name = {user_name} email = {email}>".format(
-    #         user_id=self.user_id, name=self.user_name, email=self.email)
 
     def __repr__(self):
         """Provide helpful information when printed."""
 
-        return f"<User user_id={self.user_id} user_name={self.user_name} email={self.email}>"
+        return f"""<User user_id={self.user_id} user_name={self.user_name} 
+                email={self.email} password= {self.password}>"""
 
 class Class(db.Model):
     """Class"""
@@ -31,12 +30,9 @@ class Class(db.Model):
 
 
     class_id = db.Column(db.Integer, primary_key = True, autoincrement = True)
-    class_name = db.Column(db.String(100), nullable = False, unique=True)
+    class_name = db.Column(db.String(130), nullable = False, unique=True)
     
 
-    # def __repr__(self):
-    #     return "<Class id = {class_id} name = {class_name}>".format(
-    #         user_id=self.user_id, name=self.class_name)
     def __repr__(self):
         """Provide helpful information when printed."""
 
@@ -54,19 +50,17 @@ class UserClass(db.Model):
                         nullable = False)
     class_id = db.Column(db.Integer, db.ForeignKey("classes.class_id"),
                             nullable = False)
-    class_saved = db.Column(db.String(100))
-    class_attended = db.Column(db.String(100))
+    class_saved = db.Column(db.String(130))
+    class_attended = db.Column(db.String(130))
 
     user = db.relationship("User", backref="user_classes") 
 
-    # def __repr__(self):
-    #     return "<UserClass class id = {userClass_id} user id = {user_id} class id = {class_id} class_saved = {class_saved} class_attended = {class_attended}>".format(
-    #         userClass_id=self.userClass_id, user_id=self.user_id, class_id=self.class_id, 
-    #         class_saved = self.class_saved, class_attended = self.class_attended) 
     def __repr__(self):
         """Provide helpful information when printed."""
 
-        return f"<UserClass user_class_id={self.user_class_id} user_id={self.user_id} class_id={self.class_id} class_saved={self.class_saved} class_attended={self.class_attended}>"    
+        return f"""<UserClass user_class_id={self.user_class_id} 
+            user_id={self.user_id} class_id={self.class_id} 
+            class_saved={self.class_saved} class_attended={self.class_attended}>"""    
 
 
 #####################################################################
