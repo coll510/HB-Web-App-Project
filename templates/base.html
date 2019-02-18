@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+  <head>
+    <title> Name of Dance App Title Here</title>
+</head>
+
+  <body>
+    <ul>
+    {% for message in get_flashed_messages() %}
+      <li>  {{ message }} </li>
+    {% endfor %}
+     </ul>
+  
+    {% block content %} WILL GET REPLACED FOR ANY PAGE
+     
+   
+    {% endblock %}
+  </body>
+</html>

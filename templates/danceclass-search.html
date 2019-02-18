@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %} Search for dance classes now! {% endblock %}
+
+{% block content %}
+
+  <div class="row">
+    <h1>Searh For Dance Classes Now!</h1>
+
+    <form method="GET" action="/search-results">
+
+        City*: <input type="text" name="city" required>
+        <br>
+        Distance(Miles): <input type="number" min=1 name="distance">
+        <br>
+        Style: <input type="text" name="style">
+        <br>
+        Time: 
+            <select name="time">
+              <option value="today">Today</option>
+              <option value="tomorrow">Tomorrow</option>
+              <option value="this_week">This week</option>
+              <option value="this_weekend">This weekend</option>
+              <option value="next_week">Next week</option>
+              <option value="this_month">This month</option>
+              <option value="next_month">Next month</option>
+            </select>
+        <br>
+        Sort by:
+            <select name="sort">
+              <option value="date">Date</option>
+              <option value="distance">Distance</option>
+            </select>
+         <br>   
+        <input type="submit" value="Find Classes!">
+    </form>
+</div>
+
+{% endblock %}

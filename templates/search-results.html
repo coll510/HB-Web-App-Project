@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %} Dance Classes{% endblock %}
+
+{% block content %}
+
+  <div class="row">
+
+    <h1>Search Results</h1>
+    <ul class = "results">
+
+      </ul>
+  </div>
+
+   
+
+
+    {% for event in events %}
+
+    <li>{{ event.name.text}}
+    <br>
+    {{event.start.local}}
+     <br>
+    {{event.end.local}}
+      <br>
+      <br>
+   <a href= event.url> 
+ -->{{event.url}}</li>
+
+     <br>
+     <br>
+    {% endfor %}
+
+
+  {% endblock %}
