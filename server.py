@@ -7,6 +7,7 @@ import requests
 from flask import Flask, render_template, request, flash, redirect, jsonify
 from flask_debugtoolbar import DebugToolbarExtension
 #import ipdb 
+from datetime import datetime
 
 
 app = Flask(__name__)
@@ -14,13 +15,8 @@ app.secret_key = "secretsecretsecret"
 # #This pulls from my os so connect this to my secrets.sh file.
 
 EVENTBRITE_TOKEN = os.environ.get('EVENTBRITE_TOKEN')
-# #put variable name of my secrets file token
-
 EVENTBRITE_URL = "https://www.eventbriteapi.com/v3/"
-# #get url from eventbrite
 USER_ID = os.environ.get('EVENTBRITE_USER_ID')
-#my eventbrite user id
-
 AUTH_HEADER = {"token": EVENTBRITE_TOKEN}
 
 
@@ -52,8 +48,13 @@ def find_danceclasses():
         distance = distance + "mi"
     time = request.args.get("time")
 
-
-
+    # date_time_str = ' '  
+    # date_time_obj = datetime.strptime(date_time_str, '%Y-%m-%d %H:%M:%S.%f')
+    # #imported datetime and started process to convert api date to human readable
+    #format
+    #perhaps get start.date.range and end date range from api and then pass those
+    #variables into the date time obj
+    #check eventrite lab for more info
     
         #yellow - api params to get
     if location and style and distance:
@@ -101,7 +102,7 @@ def find_danceclasses():
 
 
     data = response.json()
-    events = data['events']
+    events = data['events'] 
     pprint(data)
     #import pdb; pdb.set_trace()
 
@@ -124,12 +125,7 @@ def find_danceclasses():
     return render_template("/search-results.html", 
                             events=events)
    
-    # if events == None and response.ok: 
-    #     flash(f"Your search result didn't return any classes.")
-
-    # return redirect("/danceclass-search")
-    #figure out this logic and place it above response.ok so that it doesn't
-    #automatically return the empty page
+  
 
     
 
