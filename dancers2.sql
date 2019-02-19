@@ -189,6 +189,8 @@ COPY public.user_classes (user_class_id, user_id, class_id, class_saved, class_a
 COPY public.users (user_id, user_name, email, password) FROM stdin;
 1	Tiffany	tiffany.a@email.com	1234
 2	Jackie	jackie@email.com	1234
+3	Felicia	felicia@email.com	1234
+6	Macy	macy.a@email.com	1234
 \.
 
 
@@ -210,7 +212,7 @@ SELECT pg_catalog.setval('public.user_classes_user_class_id_seq', 1, true);
 -- Name: users_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: engineer
 --
 
-SELECT pg_catalog.setval('public.users_user_id_seq', 2, true);
+SELECT pg_catalog.setval('public.users_user_id_seq', 6, true);
 
 
 --
