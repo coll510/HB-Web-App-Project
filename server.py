@@ -151,7 +151,7 @@ def complete_registration():
     email = request.form["email"]
     password = request.form["password"]
 
-    new_user = User(name=name, email=email, password=password)
+    new_user = User(user_name=name, email=email, password=password)
 
     db.session.add(new_user)
     db.session.commit()
@@ -214,7 +214,7 @@ def logout():
 if __name__ == "__main__":
     app.debug = True
 
-    #connect_to_db(app)
+    connect_to_db(app)
 
     #Use the DebugToolbar
     DebugToolbarExtension(app)
