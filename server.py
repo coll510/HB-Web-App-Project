@@ -187,12 +187,12 @@ def complete_login():
     session["user_id"] = user.user_id
 
     flash("Logged in")
-    return redirect("danceclass-search")
+    return redirect("/danceclass-search")
 
 @app.route('/logout')
 def logout():
     """Log out."""
-
+    #add a logout button
     del session["user_id"]
     flash("Logged Out.")
     return redirect("/")
