@@ -49,8 +49,8 @@ def find_danceclasses():
         distance = distance + "mi"
     time = request.args.get("time")
 
-    # date_time_str = '2019-02-24T09:00:00' 
-    # date_time_obj = datetime.strptime(date_time_str, '%Y-%m-%d %H:%M:%S.%f')
+    date_time_str = '2019-02-24T09:00:00' 
+    date_time_obj = datetime.strptime(date_time_str, '%Y-%m-%dT%H:%M:%S')
     # #imported datetime and started process to convert api date to human readable
     #format
     #perhaps get start.date.range and end date range from api and then pass those
@@ -104,6 +104,18 @@ def find_danceclasses():
 
     data = response.json()
     events = data['events'] 
+
+    # Iterate through events
+    #   For every event, pick out the fields you care about from the response
+    #   Specifically for time, convert it from the EventBrite format to whatever format you want
+    # Pass these new event data into your template
+
+    # add logic here to convert to new format. make adjustments to jinja to reflect it as well.
+
+    for event in events:
+        return
+
+
     pprint(data)
     #import pdb; pdb.set_trace()
 
