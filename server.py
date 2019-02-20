@@ -49,8 +49,8 @@ def find_danceclasses():
         distance = distance + "mi"
     time = request.args.get("time")
 
-    date_time_str = '2019-02-24T09:00:00' 
-    date_time_obj = datetime.strptime(date_time_str, '%Y-%m-%dT%H:%M:%S')
+    # date_time_str = '2019-02-24T09:00:00' 
+    # date_time_obj = datetime.strptime(date_time_str, '%Y-%m-%dT%H:%M:%S')
     # #imported datetime and started process to convert api date to human readable
     #format
     #perhaps get start.date.range and end date range from api and then pass those
@@ -112,8 +112,8 @@ def find_danceclasses():
 
     # add logic here to convert to new format. make adjustments to jinja to reflect it as well.
 
-    for event in events:
-        return
+    # for event in events:
+    #     return
 
 
     pprint(data)
@@ -171,6 +171,7 @@ def complete_registration():
     flash(f"Welcome {name}. Add catchphrase or something.")
     return redirect("/danceclass-search")
 
+
 @app.route('/login', methods = ['GET'])
 def login_form():
     """Show login form to user."""
@@ -211,14 +212,62 @@ def logout():
 
 
 
+#@app.route('/saved-classes')
+# def classes_saved():
+#     """Query database to find the classes a user has saved."""
+    #ensure that this chooses only for that user
+#     saved_query = """
+#         SELECT classes.class_name, classes.start_time,
+#         classes.end_time, classes.url
+#         FROM classes
+#         JOIN user_classes USING (class_id)
+#         WHERE user_classes.class_saved IS True;
+#         """
+    #this query specifies the search by user id
+      # saved_query = """
+      #     SELECT users.user_id, classes.class_name, classes.url, 
+      #     classes.start_time, classes.end_time
+      #     FROM classes
+      #     JOIN user_classes USING (class_id)
+      #     JOIN users on (user_classes.user_id = users.user_id);
+      #     """
+        #get information on classes saved based on the user is
+      # db_cursor = db.session.execute(saved_query, {user_classes.user_id = 
+      #   users.user_id} )
+
+#     # saved_query = """
+#     #     SELECT * FROM classes
+#     #     JOIN user_classes USING (class_id)
+#     #     WHERE class_saved IS True;
+#     #     """
+
+#     # return render_template("classes_saved.html")
 
 
 
+# # @app.route('/tracked-classes')
+# # def classes_attended():
+#     """Query database to find the saved classes that a user has attended."""
+
+#     saved_query = """
+#         SELECT classes.class_name, classes.start_time,
+#         classes.end_time, classes.url
+#         FROM classes
+#         JOIN user_classes USING (class_id)
+#         WHERE user_classes.class_saved IS True 
+#         AND user_classes.class_attended IS True;
+#         """
+    # db_cursor = db.session.execute(saved_query, {user_classes.user_id = 
+      #   users.user_id} )
+
+    # attended_query = """
+    #     SELECT * FROM classes
+    #     JOIN user_classes USING (class_id)
+    #     WHERE class_saved IS True AND class_attended IS TRUE;
+    #     """
 
 
-
-
-
+    # return render_template("classes_attended.html")
 
 
 

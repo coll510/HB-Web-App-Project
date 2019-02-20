@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 10.3 (Ubuntu 10.3-1)
--- Dumped by pg_dump version 10.3 (Ubuntu 10.3-1)
+-- Dumped from database version 10.6 (Ubuntu 10.6-0ubuntu0.18.04.1)
+-- Dumped by pg_dump version 10.6 (Ubuntu 10.6-0ubuntu0.18.04.1)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -34,7 +34,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: classes; Type: TABLE; Schema: public; Owner: engineer
+-- Name: classes; Type: TABLE; Schema: public; Owner: vagrant
 --
 
 CREATE TABLE public.classes (
@@ -46,10 +46,10 @@ CREATE TABLE public.classes (
 );
 
 
-ALTER TABLE public.classes OWNER TO engineer;
+ALTER TABLE public.classes OWNER TO vagrant;
 
 --
--- Name: classes_class_id_seq; Type: SEQUENCE; Schema: public; Owner: engineer
+-- Name: classes_class_id_seq; Type: SEQUENCE; Schema: public; Owner: vagrant
 --
 
 CREATE SEQUENCE public.classes_class_id_seq
@@ -61,17 +61,17 @@ CREATE SEQUENCE public.classes_class_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.classes_class_id_seq OWNER TO engineer;
+ALTER TABLE public.classes_class_id_seq OWNER TO vagrant;
 
 --
--- Name: classes_class_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: engineer
+-- Name: classes_class_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: vagrant
 --
 
 ALTER SEQUENCE public.classes_class_id_seq OWNED BY public.classes.class_id;
 
 
 --
--- Name: user_classes; Type: TABLE; Schema: public; Owner: engineer
+-- Name: user_classes; Type: TABLE; Schema: public; Owner: vagrant
 --
 
 CREATE TABLE public.user_classes (
@@ -83,10 +83,10 @@ CREATE TABLE public.user_classes (
 );
 
 
-ALTER TABLE public.user_classes OWNER TO engineer;
+ALTER TABLE public.user_classes OWNER TO vagrant;
 
 --
--- Name: user_classes_user_class_id_seq; Type: SEQUENCE; Schema: public; Owner: engineer
+-- Name: user_classes_user_class_id_seq; Type: SEQUENCE; Schema: public; Owner: vagrant
 --
 
 CREATE SEQUENCE public.user_classes_user_class_id_seq
@@ -98,17 +98,17 @@ CREATE SEQUENCE public.user_classes_user_class_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.user_classes_user_class_id_seq OWNER TO engineer;
+ALTER TABLE public.user_classes_user_class_id_seq OWNER TO vagrant;
 
 --
--- Name: user_classes_user_class_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: engineer
+-- Name: user_classes_user_class_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: vagrant
 --
 
 ALTER SEQUENCE public.user_classes_user_class_id_seq OWNED BY public.user_classes.user_class_id;
 
 
 --
--- Name: users; Type: TABLE; Schema: public; Owner: engineer
+-- Name: users; Type: TABLE; Schema: public; Owner: vagrant
 --
 
 CREATE TABLE public.users (
@@ -119,10 +119,10 @@ CREATE TABLE public.users (
 );
 
 
-ALTER TABLE public.users OWNER TO engineer;
+ALTER TABLE public.users OWNER TO vagrant;
 
 --
--- Name: users_user_id_seq; Type: SEQUENCE; Schema: public; Owner: engineer
+-- Name: users_user_id_seq; Type: SEQUENCE; Schema: public; Owner: vagrant
 --
 
 CREATE SEQUENCE public.users_user_id_seq
@@ -134,56 +134,62 @@ CREATE SEQUENCE public.users_user_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.users_user_id_seq OWNER TO engineer;
+ALTER TABLE public.users_user_id_seq OWNER TO vagrant;
 
 --
--- Name: users_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: engineer
+-- Name: users_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: vagrant
 --
 
 ALTER SEQUENCE public.users_user_id_seq OWNED BY public.users.user_id;
 
 
 --
--- Name: classes class_id; Type: DEFAULT; Schema: public; Owner: engineer
+-- Name: classes class_id; Type: DEFAULT; Schema: public; Owner: vagrant
 --
 
 ALTER TABLE ONLY public.classes ALTER COLUMN class_id SET DEFAULT nextval('public.classes_class_id_seq'::regclass);
 
 
 --
--- Name: user_classes user_class_id; Type: DEFAULT; Schema: public; Owner: engineer
+-- Name: user_classes user_class_id; Type: DEFAULT; Schema: public; Owner: vagrant
 --
 
 ALTER TABLE ONLY public.user_classes ALTER COLUMN user_class_id SET DEFAULT nextval('public.user_classes_user_class_id_seq'::regclass);
 
 
 --
--- Name: users user_id; Type: DEFAULT; Schema: public; Owner: engineer
+-- Name: users user_id; Type: DEFAULT; Schema: public; Owner: vagrant
 --
 
 ALTER TABLE ONLY public.users ALTER COLUMN user_id SET DEFAULT nextval('public.users_user_id_seq'::regclass);
 
 
 --
--- Data for Name: classes; Type: TABLE DATA; Schema: public; Owner: engineer
+-- Data for Name: classes; Type: TABLE DATA; Schema: public; Owner: vagrant
 --
 
 COPY public.classes (class_id, class_name, start_time, end_time, url) FROM stdin;
 1	Jikilele	\N	\N	jikilele.com
+2	Samba Rio	\N	\N	sambariooakland.com
+3	Salsa By The Lake	\N	\N	salsabythelake.com
 \.
 
 
 --
--- Data for Name: user_classes; Type: TABLE DATA; Schema: public; Owner: engineer
+-- Data for Name: user_classes; Type: TABLE DATA; Schema: public; Owner: vagrant
 --
 
 COPY public.user_classes (user_class_id, user_id, class_id, class_saved, class_attended) FROM stdin;
 1	1	1	t	\N
+2	1	2	t	t
+3	2	3	t	t
+4	3	3	t	t
+5	3	2	t	\N
 \.
 
 
 --
--- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: engineer
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: vagrant
 --
 
 COPY public.users (user_id, user_name, email, password) FROM stdin;
@@ -191,32 +197,33 @@ COPY public.users (user_id, user_name, email, password) FROM stdin;
 2	Jackie	jackie@email.com	1234
 3	Felicia	felicia@email.com	1234
 6	Macy	macy.a@email.com	1234
+7	Michelle	michelle@email.com	1234
 \.
 
 
 --
--- Name: classes_class_id_seq; Type: SEQUENCE SET; Schema: public; Owner: engineer
+-- Name: classes_class_id_seq; Type: SEQUENCE SET; Schema: public; Owner: vagrant
 --
 
-SELECT pg_catalog.setval('public.classes_class_id_seq', 1, true);
-
-
---
--- Name: user_classes_user_class_id_seq; Type: SEQUENCE SET; Schema: public; Owner: engineer
---
-
-SELECT pg_catalog.setval('public.user_classes_user_class_id_seq', 1, true);
+SELECT pg_catalog.setval('public.classes_class_id_seq', 3, true);
 
 
 --
--- Name: users_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: engineer
+-- Name: user_classes_user_class_id_seq; Type: SEQUENCE SET; Schema: public; Owner: vagrant
 --
 
-SELECT pg_catalog.setval('public.users_user_id_seq', 6, true);
+SELECT pg_catalog.setval('public.user_classes_user_class_id_seq', 5, true);
 
 
 --
--- Name: classes classes_class_name_key; Type: CONSTRAINT; Schema: public; Owner: engineer
+-- Name: users_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: vagrant
+--
+
+SELECT pg_catalog.setval('public.users_user_id_seq', 7, true);
+
+
+--
+-- Name: classes classes_class_name_key; Type: CONSTRAINT; Schema: public; Owner: vagrant
 --
 
 ALTER TABLE ONLY public.classes
@@ -224,7 +231,7 @@ ALTER TABLE ONLY public.classes
 
 
 --
--- Name: classes classes_pkey; Type: CONSTRAINT; Schema: public; Owner: engineer
+-- Name: classes classes_pkey; Type: CONSTRAINT; Schema: public; Owner: vagrant
 --
 
 ALTER TABLE ONLY public.classes
@@ -232,7 +239,7 @@ ALTER TABLE ONLY public.classes
 
 
 --
--- Name: user_classes user_classes_pkey; Type: CONSTRAINT; Schema: public; Owner: engineer
+-- Name: user_classes user_classes_pkey; Type: CONSTRAINT; Schema: public; Owner: vagrant
 --
 
 ALTER TABLE ONLY public.user_classes
@@ -240,7 +247,7 @@ ALTER TABLE ONLY public.user_classes
 
 
 --
--- Name: users users_email_key; Type: CONSTRAINT; Schema: public; Owner: engineer
+-- Name: users users_email_key; Type: CONSTRAINT; Schema: public; Owner: vagrant
 --
 
 ALTER TABLE ONLY public.users
@@ -248,7 +255,7 @@ ALTER TABLE ONLY public.users
 
 
 --
--- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: engineer
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: vagrant
 --
 
 ALTER TABLE ONLY public.users
@@ -256,7 +263,7 @@ ALTER TABLE ONLY public.users
 
 
 --
--- Name: users users_user_name_key; Type: CONSTRAINT; Schema: public; Owner: engineer
+-- Name: users users_user_name_key; Type: CONSTRAINT; Schema: public; Owner: vagrant
 --
 
 ALTER TABLE ONLY public.users
@@ -264,7 +271,7 @@ ALTER TABLE ONLY public.users
 
 
 --
--- Name: user_classes user_classes_class_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: engineer
+-- Name: user_classes user_classes_class_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: vagrant
 --
 
 ALTER TABLE ONLY public.user_classes
@@ -272,7 +279,7 @@ ALTER TABLE ONLY public.user_classes
 
 
 --
--- Name: user_classes user_classes_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: engineer
+-- Name: user_classes user_classes_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: vagrant
 --
 
 ALTER TABLE ONLY public.user_classes
