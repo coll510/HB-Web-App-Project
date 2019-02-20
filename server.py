@@ -169,7 +169,7 @@ def complete_registration():
     db.session.commit()
 
     flash(f"Welcome {name}. Add catchphrase or something.")
-    return redirect("/danceclass-search")
+    return redirect("/login")
 
 
 @app.route('/login', methods = ['GET'])
@@ -211,45 +211,71 @@ def logout():
     return redirect("/")
 
 
-
-@app.route('/saved-classes')
-def classes_saved():
+@app.route('/saved-classes', methods=['POST'])
+def save_class():
+    """ Save this class to the database and to the user's list of saved classes."""
 
     user_id = session["user_id"]
-#     """Query database to find the classes a user has saved."""
-    #ensure that this chooses only for that user
-#     saved_query = """
-#         SELECT classes.class_name, classes.start_time,
-#         classes.end_time, classes.url
-#         FROM classes
-#         JOIN user_classes USING (class_id)
-#         WHERE user_classes.class_saved IS True;
-#         """
-    saved = #put sqlalchemy here if i choose to
+
+    class_name = request.form.get("class_name")
+    start_time = request.form.get("start_time")
+    end_time = request.form.get("end_time")
+    url = request.form.get("url")
+    #how does this specify which table to add to
+
+    sql = """
+        INSERT INTO dancers2 (class_name, 
+        start_time, end_time, url)
+        VALUES (#insert info from the specific class user clicked to save)
+        """
+    db.session.execute(
+        sql, {
+            "class_name": class_name,
+            "start_time": start_time,
+            "end_time": end_time, 
+            "url": url
+
+        }
+    )
+
+    # db.session.add(user_classes)
+    db.session.commit()
+
+    return redirect("/search-results")
+
+@app.route('/saved-classes', methods=['GET'])
+def my_saved_classes():
+    """Query database to find and display the classes a user has saved."""
+
+    user_id = session["user_id"]
+#     
+   
+    #saved = #put sqlalchemy here if i choose to
     #write query for only the logged in user here, not everyone
 
-    #this query specifies the search by user id
-    saved_query = """
-          SELECT users.user_id, classes.class_name, classes.url, 
-          classes.start_time, classes.end_time
-          FROM classes
-          JOIN user_classes USING (class_id)
-          JOIN users on (user_classes.user_id = users.user_id);
-          """
-        #get information on classes saved based on the user is
-      db_cursor = db.session.execute(saved_query, {user_classes.user_id = 
-        users.user_id} )
+    # #this query specifies the search by user id
+    # saved_query = """
+    #       SELECT users.user_id, classes.class_name, classes.url, 
+    #       classes.start_time, classes.end_time
+    #       FROM classes
+    #       JOIN user_classes USING (class_id)
+    #       JOIN users on (user_classes.user_id = users.user_id)
+    #       WHERE user_classes.class_saved IS True;;
+    #       """
+    #     #get information on classes saved based on the user id
+    # db_cursor = db.session.execute(saved_query, {put html id info here. should match variables
+    # i will set in this route above the saved query block.} )
 
-#     # saved_query = """
-#     #     SELECT * FROM classes
-#     #     JOIN user_classes USING (class_id)
-#     #     WHERE class_saved IS True;
-#     #     """
+    # db_cursor.fetchall()
 
-#     # return render_template("classes_saved.html")
+
+#     # return render_template("classes_saved.html", dancers2=dancers2)
 
 #two routes - 1 to display what the user has already saved and one to post the
 #display 
+
+
+
 
 # # @app.route('/tracked-classes')
 # # def classes_attended():
