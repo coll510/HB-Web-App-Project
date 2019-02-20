@@ -28,14 +28,18 @@
       <a href= {{event.url}} target="_blank"> 
         -->Event link here</a></li>
     <br>
-        <form action='/saved-classes' method='POST'>
-            <input type="submit" value="Save Class">
+        <form action='/saved-classes' method='POST'> 
+            <input type="submit" name= {{event.name}} id="save-button" value="Save Class" />
         </form>
+
       
     </div>
+       
     <br>
     <br>
     {% endfor %}
+
+     <!-- <script src="/static/user-class-info.js"></script> -->
 
 
 {% endblock %}

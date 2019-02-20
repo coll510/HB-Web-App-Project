@@ -212,8 +212,10 @@ def logout():
 
 
 
-#@app.route('/saved-classes')
-# def classes_saved():
+@app.route('/saved-classes')
+def classes_saved():
+
+    user_id = session["user_id"]
 #     """Query database to find the classes a user has saved."""
     #ensure that this chooses only for that user
 #     saved_query = """
@@ -223,17 +225,20 @@ def logout():
 #         JOIN user_classes USING (class_id)
 #         WHERE user_classes.class_saved IS True;
 #         """
+    saved = #put sqlalchemy here if i choose to
+    #write query for only the logged in user here, not everyone
+
     #this query specifies the search by user id
-      # saved_query = """
-      #     SELECT users.user_id, classes.class_name, classes.url, 
-      #     classes.start_time, classes.end_time
-      #     FROM classes
-      #     JOIN user_classes USING (class_id)
-      #     JOIN users on (user_classes.user_id = users.user_id);
-      #     """
+    saved_query = """
+          SELECT users.user_id, classes.class_name, classes.url, 
+          classes.start_time, classes.end_time
+          FROM classes
+          JOIN user_classes USING (class_id)
+          JOIN users on (user_classes.user_id = users.user_id);
+          """
         #get information on classes saved based on the user is
-      # db_cursor = db.session.execute(saved_query, {user_classes.user_id = 
-      #   users.user_id} )
+      db_cursor = db.session.execute(saved_query, {user_classes.user_id = 
+        users.user_id} )
 
 #     # saved_query = """
 #     #     SELECT * FROM classes
@@ -243,7 +248,8 @@ def logout():
 
 #     # return render_template("classes_saved.html")
 
-
+#two routes - 1 to display what the user has already saved and one to post the
+#display 
 
 # # @app.route('/tracked-classes')
 # # def classes_attended():
