@@ -1,6 +1,6 @@
 
 from flask_sqlalchemy import SQLAlchemy
-
+DB_URI = "postgresql:///dancers2"
 db = SQLAlchemy()
 
 """ Model Definitions """

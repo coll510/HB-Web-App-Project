@@ -12,6 +12,7 @@ from model import connect_to_db, db, User, Class, UserClass
 
 
 app = Flask(__name__)
+
 app.secret_key = "secretsecretsecret" 
 # #This pulls from my os so connect this to my secrets.sh file.
 
@@ -200,7 +201,14 @@ def complete_login():
     session["user_id"] = user.user_id
 
     flash("Logged in")
-    return redirect("/danceclass-search")
+    return redirect("/user-profile")
+    #return redirect("/danceclass-search")
+
+@app.route('/user-profile')
+def show_profile():
+    """Show user profile info."""
+
+    return render_template("user_info.html")
 
 @app.route('/logout')
 def logout():
@@ -215,31 +223,42 @@ def logout():
 def save_class():
     """ Save this class to the database and to the user's list of saved classes."""
 
-    user_id = session["user_id"]
+    #Get the user id from the session
+    #user_id = session["user_id"]
+    email= session['user']
+    user_id = User.query.filter_by(email=email).one().user_id
 
     class_name = request.form.get("class_name")
     start_time = request.form.get("start_time")
     end_time = request.form.get("end_time")
     url = request.form.get("url")
     #how does this specify which table to add to
+    #This adds the class info to the database. Still need to make sure it 
+    #saves to that users saved classes list.
+    class_info = Class(class_name=class_name, start_time=start_time, end_time=
+        end_time, url=url)
 
-    sql = """
-        INSERT INTO dancers2 (class_name, 
-        start_time, end_time, url)
-        VALUES (#insert info from the specific class user clicked to save)
-        """
-    db.session.execute(
-        sql, {
-            "class_name": class_name,
-            "start_time": start_time,
-            "end_time": end_time, 
-            "url": url
+    db.session.add(class_info)
+    db.session.commit()
+    # sql = """
+    #     INSERT INTO dancers2 (class_name, 
+    #     start_time, end_time, url)
+    #     VALUES (:class_name, :start_time, :end_time, :url)
+    #     """
+    # db.session.execute(
+    #     sql, { 
+    #         "class_name": class_name,
+    #         "start_time": start_time,
+    #         "end_time": end_time, 
+    #         "url": url
 
-        }
-    )
+    #     }
+    # )
 
     # db.session.add(user_classes)
-    db.session.commit()
+    # db.session.commit()
+
+    flash("You have successfully saved this class to your profile.")
 
     return redirect("/search-results")
 
@@ -269,7 +288,8 @@ def my_saved_classes():
     # db_cursor.fetchall()
 
 
-#     # return render_template("classes_saved.html", dancers2=dancers2)
+    return render_template("classes_saved.html", class_name=class_name, 
+    class_url=class_url, start_time=start_time, end_time=end_time) # dancers2=dancers2)
 
 #two routes - 1 to display what the user has already saved and one to post the
 #display 
@@ -277,8 +297,8 @@ def my_saved_classes():
 
 
 
-# # @app.route('/tracked-classes')
-# # def classes_attended():
+@app.route('/tracked-classes')
+def classes_attended():
 #     """Query database to find the saved classes that a user has attended."""
 
 #     saved_query = """
@@ -299,7 +319,7 @@ def my_saved_classes():
     #     """
 
 
-    # return render_template("classes_attended.html")
+    return render_template("classes_attended.html")
 
 
 
@@ -310,6 +330,6 @@ if __name__ == "__main__":
     connect_to_db(app)
 
     #Use the DebugToolbar
-    DebugToolbarExtension(app)
+    #DebugToolbarExtension(app)
 
     app.run(host="0.0.0.0")
