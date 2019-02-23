@@ -100,7 +100,7 @@ def find_danceclasses():
     response = requests.get("https://www.eventbriteapi.com/v3/events/search/", params=payload) 
                            
     print("search url")   
-    print(response.url)
+    #print(response.url)
 
 
     data = response.json()
@@ -117,7 +117,7 @@ def find_danceclasses():
     #     return
 
 
-    pprint(data)
+    #pprint(data)
     #import pdb; pdb.set_trace()
 
     #Redirect to search page if results are empty.
@@ -127,7 +127,7 @@ def find_danceclasses():
 
     #Return results
     elif response.ok:
-        classes = data['events']
+        events = data['events']
        
 
     else: 
@@ -222,41 +222,40 @@ def logout():
 @app.route('/saved-classes', methods=['POST'])
 def save_class():
     """ Save this class to the database and to the user's list of saved classes."""
-
+    print("hello")
     #Get the user id from the session
-    #user_id = session["user_id"]
-    email= session['user']
-    user_id = User.query.filter_by(email=email).one().user_id
-
+    user_id = session["user_id"]
+    
+    print(request.form)
+    #save class info to database table class
     class_name = request.form.get("class_name")
     start_time = request.form.get("start_time")
     end_time = request.form.get("end_time")
     url = request.form.get("url")
-    #how does this specify which table to add to
+    print(class_name)
+    print(start_time)
+    print(url)
+    print(end_time)
+    
     #This adds the class info to the database. Still need to make sure it 
     #saves to that users saved classes list.
-    class_info = Class(class_name=class_name, start_time=start_time, end_time=
-        end_time, url=url)
+    #can't successfully instatiate new dance classes in db yet!
+    class_info = Class(class_name=class_name, start_time=start_time, 
+                       end_time=end_time, url=url)
 
     db.session.add(class_info)
     db.session.commit()
-    # sql = """
-    #     INSERT INTO dancers2 (class_name, 
-    #     start_time, end_time, url)
-    #     VALUES (:class_name, :start_time, :end_time, :url)
-    #     """
-    # db.session.execute(
-    #     sql, { 
-    #         "class_name": class_name,
-    #         "start_time": start_time,
-    #         "end_time": end_time, 
-    #         "url": url
 
-    #     }
-    # )
+    class_id = Class.query.filter_by(class_name=class_name).one() #query for just created class id
 
-    # db.session.add(user_classes)
-    # db.session.commit()
+    #Add user_class info to database table user_class
+
+    saved_class = UserClass(user_id=user_id, class_id=class_id, class_saved=True, class_attended=False)
+
+    db.session.add(saved_class)
+    db.session.commit()
+    
+       
 
     flash("You have successfully saved this class to your profile.")
 
@@ -267,29 +266,15 @@ def my_saved_classes():
     """Query database to find and display the classes a user has saved."""
 
     user_id = session["user_id"]
-#     
-   
-    #saved = #put sqlalchemy here if i choose to
-    #write query for only the logged in user here, not everyone
 
-    # #this query specifies the search by user id
-    # saved_query = """
-    #       SELECT users.user_id, classes.class_name, classes.url, 
-    #       classes.start_time, classes.end_time
-    #       FROM classes
-    #       JOIN user_classes USING (class_id)
-    #       JOIN users on (user_classes.user_id = users.user_id)
-    #       WHERE user_classes.class_saved IS True;;
-    #       """
-    #     #get information on classes saved based on the user id
-    # db_cursor = db.session.execute(saved_query, {put html id info here. should match variables
-    # i will set in this route above the saved query block.} )
-
-    # db_cursor.fetchall()
+    saved = UserClass.query.filter_by(user_id=user_id).all()
+    print(saved)
 
 
-    return render_template("classes_saved.html", class_name=class_name, 
-    class_url=class_url, start_time=start_time, end_time=end_time) # dancers2=dancers2)
+    return render_template("classes_saved.html", saved=saved) # dancers2=dancers2)
+
+    # return render_template("classes_saved.html", class_name=class_name, 
+    # class_url=class_url, start_time=start_time, end_time=end_time) # dancers2=dancers2)
 
 #two routes - 1 to display what the user has already saved and one to post the
 #display 
