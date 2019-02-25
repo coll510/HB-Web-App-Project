@@ -236,17 +236,26 @@ def save_class():
     print(start_time)
     print(url)
     print(end_time)
+
+    existing_class = Class.query.filter_by(class_name=class_name).first() 
+    #Class queries for the whole class object. 
+    if not existing_class:
+
     
     #This adds the class info to the database. Still need to make sure it 
     #saves to that users saved classes list.
     #can't successfully instatiate new dance classes in db yet!
-    class_info = Class(class_name=class_name, start_time=start_time, 
+        class_info = Class(class_name=class_name, start_time=start_time, 
                        end_time=end_time, url=url)
 
-    db.session.add(class_info)
-    db.session.commit()
-
-    class_id = Class.query.filter_by(class_name=class_name).one() #query for just created class id
+        db.session.add(class_info)
+        db.session.commit()
+        class_id = class_info.class_id #this will get the new class id for that class. 
+            #now i can do the next conditional to add to the userclass table. 
+#this needs to change class id from an object above to a number below so that it can query/save
+#put something here that will conver it from an object to a number
+    if existing_class:
+        class_id = existing_class.class_id
 
     #Add user_class info to database table user_class
 
