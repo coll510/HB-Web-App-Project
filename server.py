@@ -50,8 +50,7 @@ def find_danceclasses():
         distance = distance + "mi"
     time = request.args.get("time")
 
-    # date_time_str = '2019-02-24T09:00:00' 
-    # date_time_obj = datetime.strptime(date_time_str, '%Y-%m-%dT%H:%M:%S')
+    
     # #imported datetime and started process to convert api date to human readable
     #format
     #perhaps get start.date.range and end date range from api and then pass those
@@ -106,6 +105,23 @@ def find_danceclasses():
     data = response.json()
     events = data['events'] 
 
+
+    processed_events = []
+    for event in events: 
+        name = event['name']['text']
+        start_time = get_readable_date(event['start']['local'])
+        end_time = get_readable_date(event['end']['local'])
+        url = event['url']
+
+        processed_event = {
+            'name': name,
+            'start_time': start_time,
+            'end_time': end_time,
+            'url': url
+        }
+
+        processed_events.append(processed_event)
+
     # Iterate through events
     #   For every event, pick out the fields you care about from the response
     #   Specifically for time, convert it from the EventBrite format to whatever format you want
@@ -120,6 +136,13 @@ def find_danceclasses():
     #pprint(data)
     #import pdb; pdb.set_trace()
 
+    # if response.ok:
+    #     events = data.json()['events']
+    #     if events == []:
+    #         # whatever
+    #     else:
+    #         # do the good stuff
+
     #Redirect to search page if results are empty.
     if response.ok and events == []:
         flash("Your search result didn't return any classes. Please search again.")
@@ -132,20 +155,24 @@ def find_danceclasses():
 
     else: 
         flash(f"No classes: {data['error_description']}")
-    #     classes = []
-    # need to add an elif/else statement for if there are no result
+        return redirect("/danceclass-search")
+    
 
 
     return render_template("/search-results.html", 
-                            events=events)
-   
-  
-
+                            events=processed_events)
     
-
     # else: 
     #     flash("Please complete the required information.")
     #     return redirect("/danceclass-search")
+
+def get_readable_date(iso_formatted_string):
+
+    date_time_obj = datetime.strptime(iso_formatted_string, '%Y-%m-%dT%H:%M:%S')
+   
+    return date_time_obj.strftime('%m/%d/%Y Time: %I:%M %p')
+    
+
 
 
 @app.route('/register', methods = ['GET'])
