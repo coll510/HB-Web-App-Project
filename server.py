@@ -50,12 +50,7 @@ def find_danceclasses():
         distance = distance + "mi"
     time = request.args.get("time")
 
-    
-    # #imported datetime and started process to convert api date to human readable
-    #format
-    #perhaps get start.date.range and end date range from api and then pass those
-    #variables into the date time obj
-    #check eventrite lab for more info
+
     
         #yellow - api params to get
     if location and style and distance:
@@ -99,7 +94,7 @@ def find_danceclasses():
     response = requests.get("https://www.eventbriteapi.com/v3/events/search/", params=payload) 
                            
     print("search url")   
-    #print(response.url)
+    
 
 
     data = response.json()
@@ -122,15 +117,7 @@ def find_danceclasses():
 
         processed_events.append(processed_event)
 
-    # Iterate through events
-    #   For every event, pick out the fields you care about from the response
-    #   Specifically for time, convert it from the EventBrite format to whatever format you want
-    # Pass these new event data into your template
-
-    # add logic here to convert to new format. make adjustments to jinja to reflect it as well.
-
-    # for event in events:
-    #     return
+   
 
 
     #pprint(data)
@@ -240,7 +227,7 @@ def show_profile():
 @app.route('/logout')
 def logout():
     """Log out."""
-    #add a logout button
+    #add a logout button on the top of the pages in base.html.
     del session["user_id"]
     flash("Logged Out.")
     return redirect("/")
@@ -249,38 +236,30 @@ def logout():
 @app.route('/saved-classes', methods=['POST'])
 def save_class():
     """ Save this class to the database and to the user's list of saved classes."""
-    print("hello")
+    
     #Get the user id from the session
     user_id = session["user_id"]
     
-    print(request.form)
-    #save class info to database table class
+       #save class info to database table class
     class_name = request.form.get("class_name")
     start_time = request.form.get("start_time")
     end_time = request.form.get("end_time")
     url = request.form.get("url")
-    print(class_name)
-    print(start_time)
-    print(url)
-    print(end_time)
+    
 
     existing_class = Class.query.filter_by(class_name=class_name).first() 
     #Class queries for the whole class object. 
     if not existing_class:
 
     
-    #This adds the class info to the database. Still need to make sure it 
-    #saves to that users saved classes list.
-    #can't successfully instatiate new dance classes in db yet!
+    #This adds the class info to the database. 
         class_info = Class(class_name=class_name, start_time=start_time, 
                        end_time=end_time, url=url)
 
         db.session.add(class_info)
         db.session.commit()
         class_id = class_info.class_id #this will get the new class id for that class. 
-            #now i can do the next conditional to add to the userclass table. 
-#this needs to change class id from an object above to a number below so that it can query/save
-#put something here that will conver it from an object to a number
+            
     if existing_class:
         class_id = existing_class.class_id
 
@@ -303,41 +282,60 @@ def my_saved_classes():
 
     user_id = session["user_id"]
 
-    saved = UserClass.query.filter_by(user_id=user_id).all()
-    print(saved)
+
+    saved_classes = UserClass.query.filter_by(user_id=user_id).all()
+    print(saved_classes)
+
+    # users_saved_classes = []
+    # for saved in users_saved_classes: 
+    #     name = saved_class['name']['text']
+    #     start_time = get_readable_date(saved_class['start']['local'])
+    #     end_time = get_readable_date(saved_class['end']['local'])
+    #     url = saved_class['url']
+
+    #     saved_class = {
+    #         'name': name,
+    #         'start_time': start_time,
+    #         'end_time': end_time,
+    #         'url': url
+    #     }
+    
+    # users_saved_classes.append(saved_class)
+    return render_template("classes_saved.html", saved_classes=saved_classes) 
 
 
-    return render_template("classes_saved.html", saved=saved) # dancers2=dancers2)
+@app.route('/tracked-classes', methods=['POST'])
+def mark_class_attended():
 
-    # return render_template("classes_saved.html", class_name=class_name, 
-    # class_url=class_url, start_time=start_time, end_time=end_time) # dancers2=dancers2)
+    user_id = session["user_id"]
 
-#two routes - 1 to display what the user has already saved and one to post the
-#display 
+    attended_class = UserClass(user_id=user_id, class_id=class_id, class_saved=True, class_attended=True)
+
+    db.session.add(attended_class)
+    db.session.commit()
 
 
-
-
-@app.route('/tracked-classes')
+@app.route('/tracked-classes', methods=['GET'])
 def classes_attended():
 #     """Query database to find the saved classes that a user has attended."""
+    user_id = session["user_id"]
 
-#     saved_query = """
-#         SELECT classes.class_name, classes.start_time,
-#         classes.end_time, classes.url
-#         FROM classes
-#         JOIN user_classes USING (class_id)
-#         WHERE user_classes.class_saved IS True 
-#         AND user_classes.class_attended IS True;
-#         """
-    # db_cursor = db.session.execute(saved_query, {user_classes.user_id = 
-      #   users.user_id} )
+    attended = UserClass.query.filter_by(user_id=user_id).all()
+    print(attended)
 
+
+    return render_template("classes_attended.html", attended=attebded) 
+    
     # attended_query = """
     #     SELECT * FROM classes
     #     JOIN user_classes USING (class_id)
     #     WHERE class_saved IS True AND class_attended IS TRUE;
     #     """
+     
+    # db_cursor = db.session.execute(attended_query, {user_classes.user_id = 
+      #   users.user_id} )
+
+    
 
 
     return render_template("classes_attended.html")
