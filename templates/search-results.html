@@ -28,10 +28,10 @@
                      Event link</a></li>
                 <br>
                     <form action='/saved-classes' method='POST'> 
-                        <input type="hidden" name="class_name" value ={{event.name}}>
+                        <input type="hidden" name="class_name" value ="{{event.name}}">
                         <input type="hidden" name="start_time" value={{event.start_time}}>
                         <input type="hidden" name="end_time" value ={{event.end_time}}>
-                        <input type="hidden" name="url" value ={{event.url}}>
+                        <input type="hidden" name="url" value ="{{event.url}}">
                         <input type="submit" name= {{event.name.text}} id="save-button" value="Save Class" />
                     </form>
                 <br>

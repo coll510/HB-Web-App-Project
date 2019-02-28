@@ -245,6 +245,7 @@ def save_class():
     start_time = request.form.get("start_time")
     end_time = request.form.get("end_time")
     url = request.form.get("url")
+    print(class_name)
     
 
     existing_class = Class.query.filter_by(class_name=class_name).first() 
@@ -309,22 +310,33 @@ def mark_class_attended():
 
     user_id = session["user_id"]
 
-    attended_class = UserClass(user_id=user_id, class_id=class_id, class_saved=True, class_attended=True)
+    class_names = request.form.getlist("class_name") #added section
+    #query the userclass table by user id and class id
+    
+    #class1 because class is a protected python keyword
+    for class1 in class_names:
 
-    db.session.add(attended_class)
-    db.session.commit()
+        class_id = Class.query.filter_by(class_name=class1).first().class_id
+        saved_class = UserClass.query.filter_by(class_id=class_id, user_id=user_id).first() #added
+        
+        #changes the attendance field for this row
+        saved_class.class_attended = True
 
+        db.session.commit()
+    #return redirect to tracked classes route
+    return redirect('/tracked-classes')
 
 @app.route('/tracked-classes', methods=['GET'])
 def classes_attended():
 #     """Query database to find the saved classes that a user has attended."""
     user_id = session["user_id"]
 
-    attended = UserClass.query.filter_by(user_id=user_id).all()
-    print(attended)
+    attended = UserClass.query.filter_by(user_id=user_id, class_attended=True).all()
+    print(attended) 
+    
 
 
-    return render_template("classes_attended.html", attended=attebded) 
+    return render_template("classes_attended.html", attended=attended) 
     
     # attended_query = """
     #     SELECT * FROM classes
