@@ -250,8 +250,8 @@ def save_class():
     print(class_name)
     start_time = datetime.strptime(start_time.strip(), '%m/%d/%Y Time: %I:%M %p')
     end_time = datetime.strptime(end_time.strip(), '%m/%d/%Y Time: %I:%M %p')
-
-
+    
+    
     existing_class = Class.query.filter_by(class_name=class_name).first() 
     #Class queries for the whole class object. 
     if not existing_class:
