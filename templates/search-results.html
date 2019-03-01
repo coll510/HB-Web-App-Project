@@ -28,8 +28,20 @@
                     <a href= {{event.url}} target="_blank"> 
                      Event link</a></li>
                 <br>
-                    <form id="show-class" action='/saved-classes' method='POST'> 
-                        <input type="hidden" id="cl-name" name="class_name" value ="{{event.name}}">
+                    <form
+                        class="show-class"
+                        action="/saved-classes" 
+                        method="POST"
+                        data-event-name="{{ event.name }}"
+                        data-event-start=" {{ event.start_time}}"
+                        data-event-end="{{ event.end_time}}"
+                        data-event-url="{{ event.url }}"
+                        > 
+                        <input
+                            type="hidden"
+                            id="cl-name"
+                            name="class_name"
+                            value ="{{event.name}}">
                         <input type="hidden" id="cl-start" name="start_time" value={{event.start_time}}>
                         <input type="hidden" id="cl-end" name="end_time" value ={{event.end_time}}>
                         <input type="hidden" id="cl-url" name="url" value ="{{event.url}}">
