@@ -41,7 +41,7 @@ def find_danceclasses():
 
     #ipdb.set_trace()
     location = request.args.get("city")
-    #print(dir(requests))
+    
     #yellow/city is the name in my html file
     distance = request.args.get("distance")
     sort = request.args.get("sort")
@@ -239,6 +239,8 @@ def save_class():
     
     #Get the user id from the session
     user_id = session["user_id"]
+
+
     
        #save class info to database table class
     class_name = request.form.get("class_name")
@@ -273,9 +275,10 @@ def save_class():
     
        
 
-    flash("You have successfully saved this class to your profile.")
+    message = "You have successfully saved this class to your profile."
 
-    return redirect("/search-results")
+    return(message)
+    #return redirect("/search-results")
 
 @app.route('/saved-classes', methods=['GET'])
 def my_saved_classes():

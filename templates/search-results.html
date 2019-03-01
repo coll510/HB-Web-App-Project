@@ -12,7 +12,8 @@
         </ul>
   </div>
 
-   
+   <div id="confirm-save-msg"></div>
+
 
 
         {% for event in events %}
@@ -27,12 +28,12 @@
                     <a href= {{event.url}} target="_blank"> 
                      Event link</a></li>
                 <br>
-                    <form action='/saved-classes' method='POST'> 
-                        <input type="hidden" name="class_name" value ="{{event.name}}">
-                        <input type="hidden" name="start_time" value={{event.start_time}}>
-                        <input type="hidden" name="end_time" value ={{event.end_time}}>
-                        <input type="hidden" name="url" value ="{{event.url}}">
-                        <input type="submit" name= {{event.name.text}} id="save-button" value="Save Class" />
+                    <form id="show-class" action='/saved-classes' method='POST'> 
+                        <input type="hidden" id="cl-name" name="class_name" value ="{{event.name}}">
+                        <input type="hidden" id="cl-start" name="start_time" value={{event.start_time}}>
+                        <input type="hidden" id="cl-end" name="end_time" value ={{event.end_time}}>
+                        <input type="hidden" id="cl-url" name="url" value ="{{event.url}}">
+                        <input type="submit" name= {{event.name.text}} class="save-button" value="Save Class" />
                     </form>
                 <br>
                 <br>
@@ -41,7 +42,9 @@
 
         {% endfor %}
 
-     <!-- <script src="/static/user-class-info.js"></script> -->
+     <script src="http://code.jquery.com/jquery.js"></script>
 
+     <script src="/static/save-class.js"></script>
+    
 
 {% endblock %}
