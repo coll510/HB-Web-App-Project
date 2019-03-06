@@ -4,6 +4,26 @@
 
 {% block content %}
 
+<div id="user-log">
+      <table>
+        <thead>
+          <tr>
+            {% if session %}
+              <th>
+                <a href="/user-profile">My Profile</a>
+              </th>
+              <th>
+                <a href="/logout">Logout</a>
+              </th>
+            {% else %}
+              <th>
+                <a href="/login">Login</a>
+              </th>
+            {% endif %}
+          </tr>
+        </thead>
+      </table> 
+</div>
   <div class="row">
     <h1>Searh For Dance Classes Now!</h1>
 

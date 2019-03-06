@@ -160,8 +160,6 @@ def get_readable_date(iso_formatted_string):
     return date_time_obj.strftime('%m/%d/%Y Time: %I:%M %p')
     
 
-
-
 @app.route('/register', methods = ['GET'])
 def registration_form():
     """Show registration form to user to sign up to access more features."""
@@ -251,7 +249,7 @@ def save_class():
     start_time = datetime.strptime(start_time.strip(), '%m/%d/%Y Time: %I:%M %p')
     end_time = datetime.strptime(end_time.strip(), '%m/%d/%Y Time: %I:%M %p')
     
-    
+
     existing_class = Class.query.filter_by(class_name=class_name).first() 
     #Class queries for the whole class object. 
     if not existing_class:
@@ -292,23 +290,35 @@ def my_saved_classes():
     saved_classes = UserClass.query.filter_by(user_id=user_id).all()
     print(saved_classes)
 
-    # users_saved_classes = []
-    # for saved in users_saved_classes: 
-    #     name = saved_class['name']['text']
-    #     start_time = get_readable_date(saved_class['start']['local'])
-    #     end_time = get_readable_date(saved_class['end']['local'])
-    #     url = saved_class['url']
+    # datetime_obj1 = datetime.strptime(start_time.strip(), '%m/%d/%Y Time: %I:%M %p')
+    # datetime_obj2 = datetime.strptime(end_time.strip(), '%m/%d/%Y Time: %I:%M %p')
+    # start_time = datetime_obj1.strftime('%m/%d/%Y Time: %I:%M %p')
+    # end_time = datetime_obj2.strftime('%m/%d/%Y Time: %I:%M %p')
 
-    #     saved_class = {
-    #         'name': name,
-    #         'start_time': start_time,
-    #         'end_time': end_time,
-    #         'url': url
-    #     }
+    users_saved_classes = []
+    for user_class in users_saved_classes: 
+        name = user_class['name']['text']
+        start_time = get_saveable_date(user_class['start']['local'])
+        end_time = get_saveable_date(user_class['end']['local'])
+        url = user_class['url']
+
+        saved_class = {
+            'name': name,
+            'start_time': start_time,
+            'end_time': end_time,
+            'url': url
+        }
     
-    # users_saved_classes.append(saved_class)
+        users_saved_classes.append(saved_class)
+        
     return render_template("classes_saved.html", saved_classes=saved_classes) 
 
+
+def get_saveable_date(iso_string):
+
+    datetime_obj = datetime.strptime(iso_string, '%Y-%m-%d %H:%M:%S %z')
+
+    return datetime_obj.strftime('%m/%d/%Y Time: %I:%M %p')
 
 @app.route('/tracked-classes', methods=['POST'])
 def mark_class_attended():

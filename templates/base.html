@@ -5,15 +5,7 @@
 </head>
 
   <body>
-    <div id="user-log">
-      {% if session %}
-        <h1><a href="/user-profile">My Profile
-          <br>
-            <a href="/logout">Logout
-        </a></h1>
-      {% else %}
-        <h1><a href="/login">Login</a></h1>
-      {% endif %}
+     
     <ul>
     {% for message in get_flashed_messages() %}
       <li>  {{ message }} </li>
