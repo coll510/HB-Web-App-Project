@@ -286,21 +286,14 @@ def my_saved_classes():
 
     user_id = session["user_id"]
 
-
     saved_classes = UserClass.query.filter_by(user_id=user_id).all()
-    print(saved_classes)
-
-    # datetime_obj1 = datetime.strptime(start_time.strip(), '%m/%d/%Y Time: %I:%M %p')
-    # datetime_obj2 = datetime.strptime(end_time.strip(), '%m/%d/%Y Time: %I:%M %p')
-    # start_time = datetime_obj1.strftime('%m/%d/%Y Time: %I:%M %p')
-    # end_time = datetime_obj2.strftime('%m/%d/%Y Time: %I:%M %p')
-
+    
     users_saved_classes = []
-    for user_class in users_saved_classes: 
-        name = user_class['name']['text']
-        start_time = get_saveable_date(user_class['start']['local'])
-        end_time = get_saveable_date(user_class['end']['local'])
-        url = user_class['url']
+    for user_class in saved_classes: 
+        name = user_class.dance_class.class_name 
+        start_time = get_saveable_date(user_class.dance_class.start_time)
+        end_time = get_saveable_date(user_class.dance_class.end_time)
+        url = user_class.dance_class.url
 
         saved_class = {
             'name': name,
@@ -311,14 +304,13 @@ def my_saved_classes():
     
         users_saved_classes.append(saved_class)
         
-    return render_template("classes_saved.html", saved_classes=saved_classes) 
+    return render_template("classes_saved.html", users_saved_classes=users_saved_classes) 
 
 
 def get_saveable_date(iso_string):
 
-    datetime_obj = datetime.strptime(iso_string, '%Y-%m-%d %H:%M:%S %z')
 
-    return datetime_obj.strftime('%m/%d/%Y Time: %I:%M %p')
+    return iso_string.strftime('%m/%d/%Y Time: %I:%M %p')
 
 @app.route('/tracked-classes', methods=['POST'])
 def mark_class_attended():
@@ -348,10 +340,26 @@ def classes_attended():
 
     attended = UserClass.query.filter_by(user_id=user_id, class_attended=True).all()
     print(attended) 
+
+    user_attended_classes = []
+    for user_class in attended: 
+        name = user_class.dance_class.class_name 
+        start_time = get_saveable_date(user_class.dance_class.start_time)
+        end_time = get_saveable_date(user_class.dance_class.end_time)
+        url = user_class.dance_class.url
+
+        tracked_class = {
+            'name': name,
+            'start_time': start_time,
+            'end_time': end_time,
+            'url': url
+        }
+    
+        user_attended_classes.append(tracked_class)
     
 
 
-    return render_template("classes_attended.html", attended=attended) 
+    return render_template("classes_attended.html", user_attended_classes=user_attended_classes) 
     
     # attended_query = """
     #     SELECT * FROM classes
@@ -368,6 +376,38 @@ def classes_attended():
     return render_template("classes_attended.html")
 
 
+@app.route("/attended-chart.json")
+def classes_attended_data():
+    #Show classes attended data in chart.js
+
+    data_dict = {
+                "labels": [ 
+                    "January", "February", "March", "April",
+                    "May", "June", "July", "August", 
+                    "September", "October", "November", 
+                    "December"
+                ],
+                "datasets": [
+                    {
+                        "data": [4, 9, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                        "backgroundColor": [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)',
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)'
+                        ] 
+                    }]
+    }
+
+    return jsonify(data_dict)
 
 
 if __name__ == "__main__":
