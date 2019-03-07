@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% block title %} My Profile! {% endblock %}
+
+{% block content %}
+
+<h1>My Info </h1>
+
+<canvas id="myChart" width="200" height="50"></canvas>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+
+<script src="path/to/chartjs/dist/Chart.js"></script>
+
+
+
+
+
+<div id="user-log">
+      <table>
+        <thead>
+          <tr>
+            {% if session %}
+              <th>
+                <a href="/logout">Logout</a>
+              </th>
+            {% else %}
+              <th>
+                <a href="/login">Login</a>
+              </th>
+            {% endif %}
+          </tr>
+        </thead>
+      </table>   
+</div>
+  <div class="row">
+    
+
+            <form method='GET' action= '/saved-classes'> 
+                <input type="submit" id="saved-classes" value="Saved Classes" />
+            </form>
+        <br>
+        <br>
+            <form method='GET' action= '/tracked-classes'> 
+                <input type="submit" id="tracked-classes" value="Classes Attended" />
+            </form>
+        <br>
+        <br>
+            
+            <form method='GET' action= '/danceclass-search'> 
+                <input type="submit" id="class-search" value="Search Now" <p> Find a dance class now!</p>
+
+            </form>
+  </div>
+
+<script>
+var ctx = document.getElementById('myChart').getContext('2d');
+var chart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'bar',
+
+    // The data for our dataset
+    data: {
+        labels: ["January", "February", "March", "April",
+                    "May", "June", "July", "August", 
+                    "September", "October", "November", 
+                    "December"],
+        datasets: [{
+            label: "My Attended Classes",
+            backgroundColor: 'rgb(255, 206, 86)',
+            borderColor: 'rgb(255, 206, 86)',
+            data: [{{ jan }}, 15, {{ mar }}, {{ apr }} , {{ may }}, {{ jun }}, 
+            {{ jul }}, {{ aug }}, {{ sep }}, {{ octo }}, {{ nov }}, {{ dec }}],
+        }]
+    },
+
+    // Configuration options go here
+    options: {}
+});
+</script>
+
+
+
+
+
+
+
+
+
+{% endblock %}
+
+
+
+  
+

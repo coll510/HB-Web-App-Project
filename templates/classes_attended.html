@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %} My Classes Attended {% endblock %}
+
+{% block content %}
+
+<div id="user-log">
+      <table>
+        <thead>
+          <tr>
+            {% if session %}
+              <th>
+                <a href="/user-profile">My Profile</a>
+              </th>
+              <th>
+                <a href="/logout">Logout</a>
+              </th>
+            {% else %}
+              <th>
+                <a href="/login">Login</a>
+              </th>
+            {% endif %}
+          </tr>
+        </thead>
+      </table> 
+</div>
+
+<div class="row">
+    <h1>My Classes Attended</h1>
+
+    {% for user_class in user_attended_classes %}
+        <div id="class-attended">
+                <li id="class">
+                   
+             {{user_class["name"]}}
+            <br>
+             {{user_class["start_time"]}}         
+            <br>
+            {{user_class["end_time"]}} 
+            <br>
+            
+             <a href= {{user_class["url"]}} target="_blank"> 
+                 Event link</a></li>
+            <br>
+
+    {% endfor %}
+ </div>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %} My Saved Classes! {% endblock %}
+
+{% block content %}
+
+<div id="user-log">
+      <table>
+        <thead>
+          <tr>
+            {% if session %}
+              <th>
+                <a href="/user-profile">My Profile</a>
+              </th>
+              <th>
+                <a href="/logout">Logout</a>
+              </th>
+            {% else %}
+              <th>
+                <a href="/login">Login</a>
+              </th>
+            {% endif %}
+          </tr>
+        </thead>
+      </table> 
+</div>
+<div class="row">
+    <h1>My Saved Classes</h1>
+        <form action= '/tracked-classes', method = 'POST'>
+
+        {% for user_class in users_saved_classes %}
+        <div id="class-saved">
+                <li id="class">
+                   
+             {{user_class["name"]}}
+            <br>
+             {{user_class["start_time"]}}         
+            <br>
+            {{user_class["end_time"]}} 
+            <br>
+            
+             <a href= {{user_class["url"]}} target="_blank"> 
+                 Event link</a></li>
+            <br>
+       
+                        <input type="checkbox" name="class_name" value="{{user_class["name"]}}">Mark as attended 
+             <br>   
+            <br>
+        {% endfor%}
+        
+            <input type="submit" value="Track attended classes">
+                    </form>
+                    <br>
+
+ </div>
+{% endblock %}
