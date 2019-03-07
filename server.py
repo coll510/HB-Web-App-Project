@@ -220,7 +220,35 @@ def complete_login():
 def show_profile():
     """Show user profile info."""
 
-    return render_template("user_info.html")
+    user_id = session["user_id"]
+
+    attended = UserClass.query.filter(UserClass.user_id==user_id, UserClass.class_attended==True).all()
+
+    
+    jan = sum(user_class.dance_class.start_time.month == 1 for user_class in attended)
+    feb = (user_class.dance_class.start_time.strftime('%m') == "02" for user_class in attended)
+    mar = sum(user_class.dance_class.start_time.strftime('%m') == "03" for user_class in attended)
+    apr = sum(user_class.dance_class.start_time.strftime('%m') == "04" for user_class in attended)
+    may = sum(user_class.dance_class.start_time.strftime('%m') == "05" for user_class in attended)
+    jun = sum(user_class.dance_class.start_time.strftime('%m') == "06" for user_class in attended)
+    jul = sum(user_class.dance_class.start_time.strftime('%m') == "07" for user_class in attended)
+    aug = sum(user_class.dance_class.start_time.strftime('%m') == "08" for user_class in attended)
+    sep = sum(user_class.dance_class.start_time.strftime('%m') == "09" for user_class in attended)
+    octo = sum(user_class.dance_class.start_time.strftime('%m') == "10" for user_class in attended)
+    nov = sum(user_class.dance_class.start_time.strftime('%m') == "11" for user_class in attended)
+    dec = sum(user_class.dance_class.start_time.strftime('%m') == "12" for user_class in attended)
+    
+    # try:
+    #     #try to make january/each month a variable with a sum. if nothing is there, then make it 0
+
+
+
+    # except:
+    # #put the error here that I get if it doesn't exist. may be a type error. set it to 0.
+
+    months = [jan, feb, mar, apr, may, jun, jul, aug, sep, octo, nov, dec]
+
+    return render_template("user_info.html", months=months)
 
 @app.route('/logout')
 def logout():
@@ -358,7 +386,6 @@ def classes_attended():
         user_attended_classes.append(tracked_class)
     
 
-
     return render_template("classes_attended.html", user_attended_classes=user_attended_classes) 
     
     # attended_query = """
@@ -373,41 +400,73 @@ def classes_attended():
     
 
 
-    return render_template("classes_attended.html")
+    #return render_template("classes_attended.html")
 
 
 @app.route("/attended-chart.json")
 def classes_attended_data():
     #Show classes attended data in chart.js
 
-    data_dict = {
-                "labels": [ 
-                    "January", "February", "March", "April",
-                    "May", "June", "July", "August", 
-                    "September", "October", "November", 
-                    "December"
-                ],
-                "datasets": [
-                    {
-                        "data": [4, 9, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        "backgroundColor": [
-                                'rgba(255, 99, 132, 0.2)',
-                                'rgba(54, 162, 235, 0.2)',
-                                'rgba(255, 206, 86, 0.2)',
-                                'rgba(75, 192, 192, 0.2)',
-                                'rgba(153, 102, 255, 0.2)',
-                                'rgba(255, 159, 64, 0.2)',
-                                'rgba(255, 99, 132, 0.2)',
-                                'rgba(54, 162, 235, 0.2)',
-                                'rgba(255, 206, 86, 0.2)',
-                                'rgba(75, 192, 192, 0.2)',
-                                'rgba(153, 102, 255, 0.2)',
-                                'rgba(255, 159, 64, 0.2)'
-                        ] 
-                    }]
-    }
+    user_id = session["user_id"]
 
-    return jsonify(data_dict)
+    attended = UserClass.query.filter(UserClass.user_id==user_id, UserClass.class_attended==True).all()
+
+    
+#     #jan = sum(user_class.dance_class.start_time.month == 1 for user_class in attended)
+#     feb = (user_class.dance_class.start_time.strftime('%m') == "02" for user_class in attended)
+    mar = sum(user_class.dance_class.start_time.strftime('%m') == "03" for user_class in attended)
+    
+    # try:
+    #     #try to make january/each month a variable with a sum. if nothing is there, then make it 0
+
+
+
+    # except:
+    # #put the error here that I get if it doesn't exist. may be a type error. set it to 0.
+
+    # months = [jan, feb, mar, apr, may, jun, jul, aug, sep, octo, nov, dec]
+               
+    return 
+
+
+        
+    
+
+#     return render_template("classes_attended.html", user_attended_classes=user_attended_classes)
+
+#     data_dict = {
+#                 "labels": [ 
+#                     "January", "February", "March", "April",
+#                     "May", "June", "July", "August", 
+#                     "September", "October", "November", 
+#                     "December"
+#                 ],
+#                 "datasets": [
+#                     {
+#                         "data": [4, 9, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+#                         "backgroundColor": [
+#                                 'rgba(255, 99, 132, 0.2)',
+#                                 'rgba(54, 162, 235, 0.2)',
+#                                 'rgba(255, 206, 86, 0.2)',
+#                                 'rgba(75, 192, 192, 0.2)',
+#                                 'rgba(153, 102, 255, 0.2)',
+#                                 'rgba(255, 159, 64, 0.2)',
+#                                 'rgba(255, 99, 132, 0.2)',
+#                                 'rgba(54, 162, 235, 0.2)',
+#                                 'rgba(255, 206, 86, 0.2)',
+#                                 'rgba(75, 192, 192, 0.2)',
+#                                 'rgba(153, 102, 255, 0.2)',
+#                                 'rgba(255, 159, 64, 0.2)'
+#                         ] 
+#                     }]
+#     }
+
+#     return jsonify(data_dict)
+
+#create a statement user attended classes = json.dumps(user attenden clawsses)
+    
+    #in my html file let user attended classes = JSON.parse({{ user attended classes | tojson}});
+
 
 
 if __name__ == "__main__":
