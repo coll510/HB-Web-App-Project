@@ -225,8 +225,8 @@ def show_profile():
     attended = UserClass.query.filter(UserClass.user_id==user_id, UserClass.class_attended==True).all()
 
     
-    jan = sum(user_class.dance_class.start_time.month == 1 for user_class in attended)
-    feb = (user_class.dance_class.start_time.strftime('%m') == "02" for user_class in attended)
+    jan = sum(user_class.dance_class.start_time.month == "01" for user_class in attended)
+    feb = sum(user_class.dance_class.start_time.strftime('%m') == "02" for user_class in attended)
     mar = sum(user_class.dance_class.start_time.strftime('%m') == "03" for user_class in attended)
     apr = sum(user_class.dance_class.start_time.strftime('%m') == "04" for user_class in attended)
     may = sum(user_class.dance_class.start_time.strftime('%m') == "05" for user_class in attended)
@@ -244,11 +244,13 @@ def show_profile():
 
 
     # except:
-    # #put the error here that I get if it doesn't exist. may be a type error. set it to 0.
+    #put the error here that I get if it doesn't exist. may be a type error. set it to 0.
 
     months = [jan, feb, mar, apr, may, jun, jul, aug, sep, octo, nov, dec]
 
-    return render_template("user_info.html", months=months)
+    return render_template("user_info.html", jan=jan, feb=feb, mar=mar, apr=apr,
+                            may=may, jun=jun, jul=jul, aug=aug, sep=sep, octo=octo,
+                            nov=nov, dec=dec)
 
 @app.route('/logout')
 def logout():
@@ -403,33 +405,9 @@ def classes_attended():
     #return render_template("classes_attended.html")
 
 
-@app.route("/attended-chart.json")
-def classes_attended_data():
-    #Show classes attended data in chart.js
-
-    user_id = session["user_id"]
-
-    attended = UserClass.query.filter(UserClass.user_id==user_id, UserClass.class_attended==True).all()
-
-    
-#     #jan = sum(user_class.dance_class.start_time.month == 1 for user_class in attended)
-#     feb = (user_class.dance_class.start_time.strftime('%m') == "02" for user_class in attended)
-    mar = sum(user_class.dance_class.start_time.strftime('%m') == "03" for user_class in attended)
-    
-    # try:
-    #     #try to make january/each month a variable with a sum. if nothing is there, then make it 0
 
 
-
-    # except:
-    # #put the error here that I get if it doesn't exist. may be a type error. set it to 0.
-
-    # months = [jan, feb, mar, apr, may, jun, jul, aug, sep, octo, nov, dec]
-               
-    return 
-
-
-        
+# @app        
     
 
 #     return render_template("classes_attended.html", user_attended_classes=user_attended_classes)
