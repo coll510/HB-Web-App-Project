@@ -1,0 +1,181 @@
+HERE ARE MY OTHER .HTML FILES
+
+1. DANCE CLASS SEARCH
+2. SEARCH RESULTS
+3. CLASSES SAVED
+4. CLASSES ATTENDED
+
+1. DANCE CLASS SEARCH ----------------------------
+
+{% extends 'base.html' %}
+
+{% block title %} Search for dance classes now! {% endblock %}
+
+{% block content %}
+
+  <div class="row">
+    <h1>Searh For Dance Classes Now!</h1>
+
+    <form method="GET" action="/search-results">
+
+        City*: <input type="text" name="city" required>
+        <br>
+        Distance(Miles): <input type="number" min=1 name="distance">
+        <br>
+        Style: <input type="text" name="style">
+        <br>
+        Time: 
+            <select name="time">
+              <option value="today">Today</option>
+              <option value="tomorrow">Tomorrow</option>
+              <option value="this_week">This week</option>
+              <option value="this_weekend">This weekend</option>
+              <option value="next_week">Next week</option>
+              <option value="this_month">This month</option>
+              <option value="next_month">Next month</option>
+            </select>
+        <br>
+        Sort by:
+            <select name="sort">
+              <option value="date">Date</option>
+              <option value="distance">Distance</option>
+            </select>
+         <br>   
+        <input type="submit" value="Find Classes!">
+    </form>
+</div>
+
+{% endblock %}
+
+2. SEARCH RESULTS ------------------------------------------
+
+{% extends 'base.html' %}
+
+{% block title %} Dance Classes{% endblock %}
+
+{% block content %}
+
+  <div class="row">
+
+    <h1>Search Results</h1>
+        <ul class = "results">
+
+        </ul>
+  </div>
+
+   <div id="confirm-save-msg"></div>
+
+
+
+        {% for event in events %}
+            <div id="class-results">
+                <li id="name">{{ event.name}}
+                <br>
+                 {{event.start_time}}
+                <br>
+                    {{event.end_time}}
+                <br>
+                <br>
+                    <a href= {{event.url}} target="_blank"> 
+                     Event link</a></li>
+                <br>
+                    <form
+                        class="show-class"
+                        action="/saved-classes" 
+                        method="POST"
+                        data-event-name="{{ event.name }}"
+                        data-event-start=" {{ event.start_time}}"
+                        data-event-end="{{ event.end_time}}"
+                        data-event-url="{{ event.url }}"
+                        > 
+                        <input
+                            type="hidden"
+                            id="cl-name"
+                            name="class_name"
+                            value ="{{event.name}}">
+                        <input type="hidden" id="cl-start" name="start_time" value={{event.start_time}}>
+                        <input type="hidden" id="cl-end" name="end_time" value ={{event.end_time}}>
+                        <input type="hidden" id="cl-url" name="url" value ="{{event.url}}">
+                        <input type="submit" name= {{event.name.text}} class="save-button" value="Save Class" />
+                    </form>
+                <br>
+                <br>
+            </div>
+       
+
+        {% endfor %}
+
+     <script src="http://code.jquery.com/jquery.js"></script>
+
+     <script src="/static/save-class.js"></script>
+    
+
+{% endblock %}
+
+3. CLASSES SAVED ----------------------------------------------
+
+{% extends 'base.html' %}
+
+{% block title %} My Saved Classes! {% endblock %}
+
+{% block content %}
+
+<div class="row">
+    <h1>My Saved Classes</h1>
+        <form action= '/tracked-classes', method = 'POST'>
+
+        {% for user_class in saved_classes %}
+        <div id="class-saved">
+                <li id="class">
+                   
+             {{user_class.dance_class.class_name}}
+            <br>
+             {{user_class.dance_class.start_time}}         
+            <br>
+            {{user_class.dance_class.end_time}} 
+            <br>
+            
+             <a href= {{user_class.dance_class.url}} target="_blank"> 
+                 Event link</a></li>
+            <br>
+       
+                        <input type="checkbox" name="class_name" value="{{user_class.dance_class.class_name}}">Mark as attended 
+             <br>   
+            <br>
+        {% endfor%}
+            <input type="submit" value="Track attended classes">
+                    </form>
+                    <br>
+
+ </div>
+{% endblock %}
+
+4. CLASSES ATTENDED ------------------------------
+
+{% extends 'base.html' %}
+
+{% block title %} My Classes Attended {% endblock %}
+
+{% block content %}
+
+<div class="row">
+    <h1>My Classes Attended</h1>
+
+    {% for user_class in attended %}
+        <div id="class-attended">
+                <li id="class">
+                   
+             {{user_class.dance_class.class_name}}
+            <br>
+             {{user_class.dance_class.start_time}}         
+            <br>
+            {{user_class.dance_class.end_time}} 
+            <br>
+            
+             <a href= {{user_class.dance_class.url}} target="_blank"> 
+                 Event link</a></li>
+            <br>
+
+    {% endfor %}
+ </div>
+{% endblock %}

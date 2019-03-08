@@ -1,0 +1,20 @@
+{% for event in events %}
+    <div #### give name and value to div// ex. name = event. value = event.name>
+      <li>{{ event.name.text}}
+    <br>
+        {{event.start.local[5:7]}}/{{event.start.local[8:10]}}/{{event.start.local[:4]}}
+        Time {{event.start.local[11:16]}}
+    <br>
+        {{event.end.local}}
+    <br>
+    <br>
+      <a href= {{event.url}} target="_blank"> 
+        -->Event link here</a></li>
+
+        add link to js file script that holds the event listener that is listening
+        for the value of the event and 
+        (add to database). button in html and it'll connect to the js file that 
+        holds the listener. 
+    </div>
+
+    How do i connect the html button to the js savenow function????
