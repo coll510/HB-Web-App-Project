@@ -56,10 +56,10 @@
 <script>
 var ctx = document.getElementById('myChart').getContext('2d');
 var chart = new Chart(ctx, {
-    // The type of chart we want to create
+    
     type: 'bar',
 
-    // The data for our dataset
+    
     data: {
         labels: ["January", "February", "March", "April",
                     "May", "June", "July", "August", 
@@ -69,10 +69,9 @@ var chart = new Chart(ctx, {
             label: "My Attended Classes",
             backgroundColor: 'rgb(255, 206, 86)',
             borderColor: 'rgb(255, 206, 86)',
-            data: [{{ jan }}, 15, {{ mar }}, {{ apr }} , {{ may }}, {{ jun }}, 
-            {{ jul }}, {{ aug }}, {{ sep }}, {{ octo }}, {{ nov }}, {{ dec }}],
-        }]
-    },
+            data: [{{ jan }}, 15, {{ mar }}, {{ apr }}, {{ may }}, {{ jun }}, 
+            {{ jul }}, {{ aug }}, {{ sep }}, {{ octo }}, {{ nov }}, {{ dec }}]
+          }]},
 
     // Configuration options go here
     options: {}

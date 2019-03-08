@@ -26,6 +26,8 @@
 </div>
 <div class="row">
     <h1>My Saved Classes</h1>
+</div>
+      <div class="row">
         <form action= '/tracked-classes', method = 'POST'>
 
         {% for user_class in users_saved_classes %}
@@ -51,6 +53,6 @@
             <input type="submit" value="Track attended classes">
                     </form>
                     <br>
-
+        </div>
  </div>
 {% endblock %}

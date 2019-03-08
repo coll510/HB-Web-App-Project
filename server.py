@@ -225,7 +225,7 @@ def show_profile():
     attended = UserClass.query.filter(UserClass.user_id==user_id, UserClass.class_attended==True).all()
 
     
-    jan = sum(user_class.dance_class.start_time.month == "01" for user_class in attended)
+    jan = sum(user_class.dance_class.start_time.strftime('%m') == "01" for user_class in attended)
     feb = sum(user_class.dance_class.start_time.strftime('%m') == "02" for user_class in attended)
     mar = sum(user_class.dance_class.start_time.strftime('%m') == "03" for user_class in attended)
     apr = sum(user_class.dance_class.start_time.strftime('%m') == "04" for user_class in attended)
@@ -246,7 +246,7 @@ def show_profile():
     # except:
     #put the error here that I get if it doesn't exist. may be a type error. set it to 0.
 
-    months = [jan, feb, mar, apr, may, jun, jul, aug, sep, octo, nov, dec]
+    #months = [jan, feb, mar, apr, may, jun, jul, aug, sep, octo, nov, dec]
 
     return render_template("user_info.html", jan=jan, feb=feb, mar=mar, apr=apr,
                             may=may, jun=jun, jul=jul, aug=aug, sep=sep, octo=octo,
@@ -255,7 +255,7 @@ def show_profile():
 @app.route('/logout')
 def logout():
     """Log out."""
-    #add a logout button on the top of the pages in base.html.
+    
     del session["user_id"]
     flash("Logged Out.")
     return redirect("/")
@@ -390,60 +390,11 @@ def classes_attended():
 
     return render_template("classes_attended.html", user_attended_classes=user_attended_classes) 
     
-    # attended_query = """
-    #     SELECT * FROM classes
-    #     JOIN user_classes USING (class_id)
-    #     WHERE class_saved IS True AND class_attended IS TRUE;
-    #     """
-     
-    # db_cursor = db.session.execute(attended_query, {user_classes.user_id = 
-      #   users.user_id} )
-
     
 
 
-    #return render_template("classes_attended.html")
 
 
-
-
-# @app        
-    
-
-#     return render_template("classes_attended.html", user_attended_classes=user_attended_classes)
-
-#     data_dict = {
-#                 "labels": [ 
-#                     "January", "February", "March", "April",
-#                     "May", "June", "July", "August", 
-#                     "September", "October", "November", 
-#                     "December"
-#                 ],
-#                 "datasets": [
-#                     {
-#                         "data": [4, 9, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-#                         "backgroundColor": [
-#                                 'rgba(255, 99, 132, 0.2)',
-#                                 'rgba(54, 162, 235, 0.2)',
-#                                 'rgba(255, 206, 86, 0.2)',
-#                                 'rgba(75, 192, 192, 0.2)',
-#                                 'rgba(153, 102, 255, 0.2)',
-#                                 'rgba(255, 159, 64, 0.2)',
-#                                 'rgba(255, 99, 132, 0.2)',
-#                                 'rgba(54, 162, 235, 0.2)',
-#                                 'rgba(255, 206, 86, 0.2)',
-#                                 'rgba(75, 192, 192, 0.2)',
-#                                 'rgba(153, 102, 255, 0.2)',
-#                                 'rgba(255, 159, 64, 0.2)'
-#                         ] 
-#                     }]
-#     }
-
-#     return jsonify(data_dict)
-
-#create a statement user attended classes = json.dumps(user attenden clawsses)
-    
-    #in my html file let user attended classes = JSON.parse({{ user attended classes | tojson}});
 
 
 
