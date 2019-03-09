@@ -26,55 +26,51 @@
 </div>
 
   <div class="row">
+    <div class="col-sm text-left">
+      <h1>Search Results</h1>
+        <ul class = "results"></ul>
+          <div id="confirm-save-msg"></div>
 
-    <h1>Search Results</h1>
-        <ul class = "results">
-
-        </ul>
-  </div>
-
-   <div id="confirm-save-msg"></div>
-
-
-
-        {% for event in events %}
-            <div id="class-results">
-                <li id="name">{{ event.name}}
-                <br>
-                 {{event.start_time}}
-                <br>
-                    {{event.end_time}}
-                <br>
-                <br>
-                    <a href= {{event.url}} target="_blank"> 
-                     Event link</a></li>
-                <br>
-                    <form
-                        class="show-class"
-                        action="/saved-classes" 
-                        method="POST"
-                        data-event-name="{{ event.name }}"
-                        data-event-start=" {{ event.start_time}}"
-                        data-event-end="{{ event.end_time}}"
-                        data-event-url="{{ event.url }}"
-                        > 
-                        <input
-                            type="hidden"
-                            id="cl-name"
-                            name="class_name"
-                            value ="{{event.name}}">
-                        <input type="hidden" id="cl-start" name="start_time" value={{event.start_time}}>
-                        <input type="hidden" id="cl-end" name="end_time" value ={{event.end_time}}>
-                        <input type="hidden" id="cl-url" name="url" value ="{{event.url}}">
-                        <input type="submit" name= {{event.name.text}} class="save-button" value="Save Class" />
-                    </form>
-                <br>
-                <br>
-            </div>
-       
-
+            {% for event in events %}
+                <div id="class-results">
+                  <li id="name">{{ event.name}}
+                    <br>
+                      {{event.start_time}}
+                    <br>
+                        {{event.end_time}}
+                    <br>
+                    <br>
+                        <a href= {{event.url}} target="_blank"> 
+                         Event link</a></li>
+                    <br>
+                        <form
+                            class="show-class"
+                            action="/saved-classes" 
+                            method="POST"
+                            data-event-name="{{ event.name }}"
+                            data-event-start=" {{ event.start_time}}"
+                            data-event-end="{{ event.end_time}}"
+                            data-event-url="{{ event.url }}"
+                            > 
+                            <input
+                                type="hidden"
+                                id="cl-name"
+                                name="class_name"
+                                value ="{{event.name}}">
+                            <input type="hidden" id="cl-start" name="start_time" value={{event.start_time}}>
+                            <input type="hidden" id="cl-end" name="end_time" value ={{event.end_time}}>
+                            <input type="hidden" id="cl-url" name="url" value ="{{event.url}}">
+                            <input type="submit" name= {{event.name.text}} class="save-button" value="Save Class" />
+                        </form>
+                    <br>
+                    <br>
+                </div>
+      
         {% endfor %}
-
+</div>
+       
+    </div>
+  </div>
 
      
 

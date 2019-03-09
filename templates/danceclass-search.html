@@ -26,11 +26,17 @@
 </div>
 <div class="container-fluid">
   <div class="row">
-    <h1>Searh For Dance Classes Now!</h1>
+    <div class="text-center">
+      <h1>Searh For Dance Classes Now!</h1>
+    </div>
   </div>
-    
+</div>
 
-  <div class = "row">
+  <div class="container">
+  <div class="row">
+    <div class="col-sm text-left">
+      Cute heading
+    
     <form method="GET" action="/search-results">
 
         City*: <input type="text" name="city" required>
@@ -55,10 +61,32 @@
               <option value="date">Date</option>
               <option value="distance">Distance</option>
             </select>
-         <br>   
+         <br>  
+         <br> 
         <input type="submit" value="Find Classes!">
     </form>
+    
   </div>
+   <div class="col-sm">
+      Cute heading.
+      <br>
+      Type a bunch of cool stuff here to discuss searching for classes, 
+      looking for classes where you live, where you visit. Discuss the 
+      option to save the class if you want to access the info in the future.
+      Maybe add a picture of the US to signify searching anywhere. 
+
+    </div>
+    <div class="col-sm">
+      Cute heading
+       <div class="col-md-12">
+
+
+        <img src="\static\images\cc-image8.jpg" alt="Lights" style="width:100%">
+    </div>
+  </div>
+    
+  
+</div>
 </div>
 
 {% endblock %}

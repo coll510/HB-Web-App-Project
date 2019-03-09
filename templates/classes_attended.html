@@ -30,6 +30,7 @@
 </div>
 
   <div class="row">
+    <div class="col-sm text-left">
     {% for user_class in user_attended_classes %}
         <div id="class-attended">
                 <li id="class">
@@ -44,7 +45,7 @@
              <a href= {{user_class["url"]}} target="_blank"> 
                  Event link</a></li>
             <br>
-
+</div>
     {% endfor %}
   </div>
  </div>
