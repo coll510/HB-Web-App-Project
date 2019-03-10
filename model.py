@@ -70,9 +70,9 @@ class UserClass(db.Model):
 # Helper functions
 
 def connect_to_db(app):
-    """Connect the database to our Flask app."""
+    """Connect the database to Flask app."""
 
-    # Configure to use our PostgreSQL database
+    # Configure to use PostgreSQL database
     app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///dancers2'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.app = app
@@ -80,9 +80,7 @@ def connect_to_db(app):
 
 
 if __name__ == "__main__":
-    # As a convenience, if we run this module interactively, it will
-    # leave you in a state of being able to work with the database
-    # directly.
+ 
 
     from server import app
     connect_to_db(app)

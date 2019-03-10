@@ -1,12 +1,10 @@
 from pprint import pprint
 import os
-#os is python's os module
-#pretty print and pretty format
+
 
 import requests
 from flask import Flask, render_template, request, flash, redirect, jsonify, session
-from flask_debugtoolbar import DebugToolbarExtension
-#import ipdb 
+from flask_debugtoolbar import DebugToolbarExtension 
 from datetime import datetime
 from model import connect_to_db, db, User, Class, UserClass
 
@@ -14,7 +12,6 @@ from model import connect_to_db, db, User, Class, UserClass
 app = Flask(__name__)
 
 app.secret_key = "secretsecretsecret" 
-# #This pulls from my os so connect this to my secrets.sh file.
 
 EVENTBRITE_TOKEN = os.environ.get('EVENTBRITE_TOKEN')
 EVENTBRITE_URL = "https://www.eventbriteapi.com/v3/"
@@ -39,10 +36,8 @@ def show_classsearch_form():
 def find_danceclasses():
     """Search for and display dance class results from API."""
 
-    #ipdb.set_trace()
-    location = request.args.get("city")
     
-    #yellow/city is the name in my html file
+    location = request.args.get("city")
     distance = request.args.get("distance")
     sort = request.args.get("sort")
     style = request.args.get("style")
@@ -52,9 +47,8 @@ def find_danceclasses():
 
 
     
-        #yellow - api params to get
     if location and style and distance:
-        # search by dance style, location and distance  
+        """Search by dance style, location and distance."""  
         payload = {"q": f"dance class {style}", 
                     "location.address": location,
                     "location.within" : distance,
@@ -64,7 +58,7 @@ def find_danceclasses():
         
 
     elif location and style:
-        # search by dance style and location 
+        """Search by dance style and location.""" 
         payload = {"q": f"dance class {style}", 
                     "location.address": location,
                     "sort_by": sort, 
@@ -72,8 +66,7 @@ def find_danceclasses():
                     "token": EVENTBRITE_TOKEN}
     
     elif location and distance:
- 
-        #search any dance class by location and distance
+        """Search any dance class by location and distance."""
         payload = {"q": "dance class", 
                     "location.address" : location, 
                     "location.within" : distance,
@@ -83,7 +76,7 @@ def find_danceclasses():
 
     
     else:
-        #general query search of "dance class" by location
+        """General query search of "dance class" by location."""
         payload = {"q": "dance class",
                     "location.address": location,
                     "sort_by": sort,
@@ -93,13 +86,8 @@ def find_danceclasses():
 
     response = requests.get("https://www.eventbriteapi.com/v3/events/search/", params=payload) 
                            
-    print("search url")   
-    
-
-
     data = response.json()
     events = data['events'] 
-
 
     processed_events = []
     for event in events: 
@@ -117,25 +105,13 @@ def find_danceclasses():
 
         processed_events.append(processed_event)
 
-   
 
-
-    #pprint(data)
-    #import pdb; pdb.set_trace()
-
-    # if response.ok:
-    #     events = data.json()['events']
-    #     if events == []:
-    #         # whatever
-    #     else:
-    #         # do the good stuff
-
-    #Redirect to search page if results are empty.
+    """Redirect to search page if results are empty."""
     if response.ok and events == []:
         flash("Your search result didn't return any classes. Please search again.")
         return redirect("/danceclass-search")
 
-    #Return results
+    """Return results."""
     elif response.ok:
         events = data['events']
        
@@ -149,9 +125,6 @@ def find_danceclasses():
     return render_template("/search-results.html", 
                             events=processed_events)
     
-    # else: 
-    #     flash("Please complete the required information.")
-    #     return redirect("/danceclass-search")
 
 def get_readable_date(iso_formatted_string):
 
@@ -170,8 +143,7 @@ def registration_form():
 def complete_registration():
     """Process user's registration to app"""
 
-    #get form variables and add user to database
-
+    #Get form variables and add user to database.
     name = request.form["name"]
     email = request.form["email"]
     password = request.form["password"]
@@ -196,10 +168,8 @@ def complete_login():
     """Log user in."""
 
     #Get variables from form and log user in to app.
-
     email = request.form["email"]
     password = request.form["password"]
-    #find the user in the database
     user = User.query.filter_by(email=email).first()
 
     if not user:
@@ -214,7 +184,7 @@ def complete_login():
 
     flash("Logged in")
     return redirect("/user-profile")
-    #return redirect("/danceclass-search")
+
 
 @app.route('/user-profile')
 def show_profile():
@@ -238,16 +208,7 @@ def show_profile():
     nov = sum(user_class.dance_class.start_time.strftime('%m') == "11" for user_class in attended)
     dec = sum(user_class.dance_class.start_time.strftime('%m') == "12" for user_class in attended)
     
-    # try:
-    #     #try to make january/each month a variable with a sum. if nothing is there, then make it 0
-
-
-
-    # except:
-    #put the error here that I get if it doesn't exist. may be a type error. set it to 0.
-
-    #months = [jan, feb, mar, apr, may, jun, jul, aug, sep, octo, nov, dec]
-
+    
     return render_template("user_info.html", jan=jan, feb=feb, mar=mar, apr=apr,
                             may=may, jun=jun, jul=jul, aug=aug, sep=sep, octo=octo,
                             nov=nov, dec=dec)
@@ -268,9 +229,7 @@ def save_class():
     #Get the user id from the session
     user_id = session["user_id"]
 
-
-    
-       #save class info to database table class
+    #save class info to database table class
     class_name = request.form.get("class_name")
     start_time = request.form.get("start_time")
     end_time = request.form.get("end_time")
@@ -281,34 +240,32 @@ def save_class():
     
 
     existing_class = Class.query.filter_by(class_name=class_name).first() 
-    #Class queries for the whole class object. 
+   
     if not existing_class:
 
     
-    #This adds the class info to the database. 
+    #Add the class info to the database. 
         class_info = Class(class_name=class_name, start_time=start_time, 
                        end_time=end_time, url=url)
 
         db.session.add(class_info)
         db.session.commit()
-        class_id = class_info.class_id #this will get the new class id for that class. 
+        class_id = class_info.class_id  
             
     if existing_class:
         class_id = existing_class.class_id
 
     #Add user_class info to database table user_class
-
     saved_class = UserClass(user_id=user_id, class_id=class_id, class_saved=True, class_attended=False)
 
     db.session.add(saved_class)
     db.session.commit()
     
        
-
     message = "You have successfully saved this class to your profile."
 
     return(message)
-    #return redirect("/search-results")
+  
 
 @app.route('/saved-classes', methods=['GET'])
 def my_saved_classes():
@@ -346,30 +303,25 @@ def get_saveable_date(iso_string):
 def mark_class_attended():
 
     user_id = session["user_id"]
-
-    class_names = request.form.getlist("class_name") #added section
-    #query the userclass table by user id and class id
+    #Query the userclass table by user id and class id
+    class_names = request.form.getlist("class_name") 
     
-    #class1 because class is a protected python keyword
     for class1 in class_names:
 
         class_id = Class.query.filter_by(class_name=class1).first().class_id
-        saved_class = UserClass.query.filter_by(class_id=class_id, user_id=user_id).first() #added
-        
-        #changes the attendance field for this row
+        saved_class = UserClass.query.filter_by(class_id=class_id, user_id=user_id).first() 
         saved_class.class_attended = True
-
         db.session.commit()
-    #return redirect to tracked classes route
+    
     return redirect('/tracked-classes')
 
 @app.route('/tracked-classes', methods=['GET'])
 def classes_attended():
-#     """Query database to find the saved classes that a user has attended."""
+    """Query database to find the saved classes that a user has attended."""
     user_id = session["user_id"]
 
     attended = UserClass.query.filter_by(user_id=user_id, class_attended=True).all()
-    print(attended) 
+     
 
     user_attended_classes = []
     for user_class in attended: 
@@ -403,7 +355,5 @@ if __name__ == "__main__":
 
     connect_to_db(app)
 
-    #Use the DebugToolbar
-    #DebugToolbarExtension(app)
 
     app.run(host="0.0.0.0")

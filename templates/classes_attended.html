@@ -31,21 +31,21 @@
 
   <div class="row">
     <div class="col-sm text-left">
-    {% for user_class in user_attended_classes %}
+      {% for user_class in user_attended_classes %}
         <div id="class-attended">
-                <li id="class">
+            <li id="class">
                    
-             {{user_class["name"]}}
+            {{user_class["name"]}}
             <br>
-             {{user_class["start_time"]}}         
+            {{user_class["start_time"]}}         
             <br>
             {{user_class["end_time"]}} 
             <br>
             
-             <a href= {{user_class["url"]}} target="_blank"> 
-                 Event link</a></li>
+            <a href= {{user_class["url"]}} target="_blank"> 
+              Event link</a></li>
             <br>
-</div>
+        </div>
     {% endfor %}
   </div>
  </div>

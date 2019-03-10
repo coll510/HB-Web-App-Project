@@ -29,32 +29,32 @@
 </div>
       <div class="row">
         <div class="col-sm text-left">
-        <form action= '/tracked-classes', method = 'POST'>
+          <form action= '/tracked-classes', method = 'POST'>
 
-        {% for user_class in users_saved_classes %}
-        <div id="class-saved">
+            {% for user_class in users_saved_classes %}
+              <div id="class-saved">
                 <li id="class">
-                   
-             {{user_class["name"]}}
-            <br>
-             {{user_class["start_time"]}}         
-            <br>
-            {{user_class["end_time"]}} 
-            <br>
-            
-             <a href= {{user_class["url"]}} target="_blank"> 
-                 Event link</a></li>
-            <br>
+                       
+                  {{user_class["name"]}}
+                  <br>
+                  {{user_class["start_time"]}}         
+                  <br>
+                  {{user_class["end_time"]}} 
+                  <br>
+                
+                  <a href= {{user_class["url"]}} target="_blank"> 
+                     Event link</a></li>
+                  <br>
        
-                        <input type="checkbox" name="class_name" value="{{user_class["name"]}}">Mark as attended 
-             <br>   
-            <br>
-        {% endfor%}
+                    <input type="checkbox" name="class_name" value="{{user_class["name"]}}">Mark as attended 
+                  <br>   
+                  <br>
+            {% endfor%}
         
-            <input type="submit" value="Track attended classes">
-                    </form>
-                    <br>
-            </div>
+              <input type="submit" value="Track attended classes">
+          </form>
+            <br>
         </div>
- </div>
+      </div>
+</div>
 {% endblock %}
