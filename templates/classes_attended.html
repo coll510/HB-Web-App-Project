@@ -25,11 +25,15 @@
       </table> 
 </div>
 
-<div class="row">
-    <h1>My Classes Attended</h1>
-</div>
-
+<div class="container-fluid">
   <div class="row">
+    <section class="left">
+
+
+    <h1>My Classes Attended</h1>
+
+
+  
     <div class="col-sm text-left">
       {% for user_class in user_attended_classes %}
         <div id="class-attended">
@@ -47,6 +51,18 @@
             <br>
         </div>
     {% endfor %}
+  </section>
+
+  <section class="right">
+    <div class="col-sm">
+    Dancing with the feet is one thing, but dancing with the heart is another.
+       <div class="col-md-8">
+        <br>
+
+        <img src="\static\images\cc-image3.jpg" alt="Lights" style="width:150%">
+    </div>
+  </div>
+  </section>
   </div>
  </div>
 {% endblock %}

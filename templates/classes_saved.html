@@ -4,6 +4,8 @@
 
 {% block content %}
 
+
+
 <div id="user-log">
       <table>
         <thead>
@@ -24,10 +26,14 @@
         </thead>
       </table> 
 </div>
-<div class="row">
+
+<div class="container-fluid">
+  <div class="row">
+    <section class="left">
+
     <h1>My Saved Classes</h1>
-</div>
-      <div class="row">
+
+      
         <div class="col-sm text-left">
           <form action= '/tracked-classes', method = 'POST'>
 
@@ -55,6 +61,18 @@
           </form>
             <br>
         </div>
+      </section>
+
+      <section class="right">
+        <div class="col-sm">
+    There are shortcuts to happiness and dancing is one of them.
+       <div class="col-md-8">
+        <br>
+
+        <img src="\static\images\cc-image7.jpg" alt="Lights" style="width:150%">
+    </div>
+  </div>
+       </section>
       </div>
 </div>
 {% endblock %}
