@@ -4,6 +4,22 @@
 
 {% block content %}
 
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dance Compass</title>
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" 
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <!-- Google Font -->
+  <link href='https://fonts.googleapis.com/css?family=Pacifico|Open+Sans+Condensed:300,300italic,700' rel='stylesheet' type='text/css'>
+  <!-- Stylesheet -->
+  <link rel="stylesheet"
+          href="style.css">
+</head>
+
+<body>
+
 <div id="user-log">
       <table>
         <thead>
@@ -24,8 +40,10 @@
         </thead>
       </table> 
 </div>
+
 <div class="container-fluid">
   <div class="row">
+    <section class="left">
     <div class="text-center">
       <h1>Searh For Dance Classes Now!</h1>
     </div>
@@ -71,11 +89,12 @@
             </select>
          <br>  
          <br> 
-         <button type="button" class="btn btn-outline-primary">Find Classes</button>
-        <!-- <input type="submit" value="Find Classes!"> -->
+         <!-- <button type="button" class="btn btn-outline-primary">Find Classes</button> -->
+        <input type="submit" value="Find Classes!"> 
     </form>
-    
+    </section>
   </div>
+
    <!-- <div class="col-sm">
       Cute heading.
       <br>
@@ -85,6 +104,7 @@
       Maybe add a picture of the US to signify searching anywhere. 
 
     </div> -->
+    <section class="right">
     <div class="col-sm">
     Dancing faces you toward heaven whichever direction you turn. -Terri Guillemets
        <div class="col-md-8">
@@ -93,9 +113,11 @@
         <img src="\static\images\cc-image8.jpg" alt="Lights" style="width:150%">
     </div>
   </div>
+</section>
     
   
 </div>
 </div>
 
 {% endblock %}
+</body>

@@ -1,5 +1,5 @@
 
-@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+/*@import url(https://fonts.googleapis.com/css?family=Roboto:300);*/
 
 
 #reg-form {
@@ -9,4 +9,35 @@
     height: 100%;
    
 }
-      
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+ 
+.left {
+  background-color: #ffd200;
+  opacity: .65;
+  background: rgba(255, 230, 20, 0.65);
+  height: 100%;
+  line-height: 1.3;
+  position: fixed;
+  width: 50%;
+  height: 100%;
+  top: 50px;
+  left: 0;
+}
+
+.right{
+/*  background-color: #000;
+  opacity: .65;*/
+  background: rgba(0, 0, 0, 0.85);
+  height: 100%;
+  line-height: 1.3;
+  right: 0;
+  position: fixed;
+  width: 50%;
+  height: 100%;
+  top: 50px;
+}
