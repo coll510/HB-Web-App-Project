@@ -1,35 +1,55 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Register</h1>
+<head>
+  <style>
 
-<form action="register" method="POST">
+      body {
+        background: url("static/images/bkgrnd2.jpg") no-repeat;
+    background-size: cover;
+    background-position-y: 20%;
+      }
 
-  <div>
-    <label>
-      Name
-      <input type="user_name" name="name">
-    </label>
-  </div>
+  </style>
+</head>
+
+<div class="reg-form">
+  <div class="container">
+    <div class="row">
+    <div class="col-sm text-left">
+  <h1>Register</h1>
+  <body class="text-center" >
+  <form action="register" class="reg-form" method="POST">
+
+    <div>
+      <label>
+        Name
+        <input type="user_name" class="form-control" placeholder= "Name" name="name">
+      </label>
+    </div>
 
   <div>
     <label>
       Email
-      <input type="email" name="email">
+      <input type="email" class="form-control" placeholder= "Email address" name="email">
     </label>
   </div>
 
   <div>
     <label>
       Password
-      <input type="password" name="password">
+      <input type="password" class="form-control" placeholder=Password name="password">
     </label>
   </div>
 
   <div>
+
     <input type="submit" value="Register">
   </div>
 
 </form>
+</div>
+</body>
 
 {% endblock %}
+

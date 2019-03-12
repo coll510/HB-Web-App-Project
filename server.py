@@ -111,7 +111,7 @@ def find_danceclasses():
         flash("Your search result didn't return any classes. Please search again.")
         return redirect("/danceclass-search")
 
-    """Return results."""
+    #Return results.
     elif response.ok:
         events = data['events']
        
