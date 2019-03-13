@@ -22,9 +22,12 @@ html, body {
   /*background: rgba(0, 0, 0, 1);*/
   border: none;
   border-radius: 0;
-  color: #F1E9DA;
-  font-family: 'Pacifico', cursive;
-  font-size: 18px;
+  color: #F0C808;
+  font-family: 'Crimson Text', serif;
+  font-size: 20px;
+  font-weight: 1000;
+  font-style: bold; 
+  font-color: black;
 
 }
 
@@ -38,8 +41,10 @@ html, body {
   width: 50%;
   height: 100%;
   top: 50px;
-  left: 0;
+  left: 20;
   padding-top: 40px; 
+  font-family: 'Crimson Text', serif;
+  font-style: italic;
 }
 
 .right{
@@ -53,14 +58,19 @@ html, body {
   width: 50%;
   height: 100%;
   top: 50px;
-  padding-top: 40px;
+  padding-top: 60px;
+  font-family: 'Crimson Text', serif;
+  font-size: 28px;
+  font-style: italic;
+  font-weight: 700;
+  text-align: center;
 }
 
 .login-form {
-    font-family: 'Pacifico', cursive;
+    font-family: 'Crimson Text', serif;
     color: white; 
 }
 .carousel-caption {
-    font-family: 'Pacifico';
+    font-family: 'Crimson Text', serif;
     color: gold; 
 }
