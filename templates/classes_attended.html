@@ -18,6 +18,53 @@
           href="style.css">
 </head>
 
+<nav class="navbar navbar-expand-lg navbar-light fixed-top bg-light">
+      <a class="navbar-brand" href="#">Dance Compass</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                  <a class="nav-link" href="/">Home</a>
+                </li>
+                
+                  
+                  {% if session %}
+                    <li class="nav-item">
+                      <a class="nav-link" href="/user-profile">My Profile</a>
+                    </li>
+                
+              
+                    <li class="nav-item">
+                      <a class="nav-link" href="/logout">Logout</a>
+                    </li>
+                  {% else %}
+                    <li class="nav-item">
+                      <a class="nav-link" href="/login">Login</a>
+                    </li>
+                  {% endif %}
+                  
+          
+                 <!--  <a class="nav-link" href="/login">Login</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/register">Sign Up</a>
+                </li> -->
+                <li class="nav-item">
+                  <a class="nav-link" href="/danceclass-search">Search</a>
+                </li>
+              </ul>
+            </div>
+              
+              <span class="navbar-text">
+                Let dance be your compass, your body your map, your soul your guide, and you will never get lost. 
+              </span>
+            </div>
+
+    </nav>
+
+<body>
 <div id="user-log">
       <table>
         <thead>
@@ -78,7 +125,8 @@
         <img src="\static\images\cc-image3.jpg" alt="Lights" style="width:150%">
     </div>
   </div>
-  </section>
+  
   </div>
  </div>
 {% endblock %}
+</body>

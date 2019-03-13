@@ -31,6 +31,15 @@ html, body {
 
 }
 
+
+.navbar-text {
+    font-family: 'Crimson Text', serif;
+    font-size: 18px;
+    font-style: bold, italic;
+    font-color: black;
+
+}
+
 .left {
   background-color: #F1E9DA;
   /*opacity: .65;*/
