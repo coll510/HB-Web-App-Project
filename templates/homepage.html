@@ -4,9 +4,8 @@
 
 {% block content %}
 
-
-<div class="container-fluid">
-  <div class = "row">
+ 
+  <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <a class="navbar-brand" href="#">Some catchy tagline</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -23,17 +22,20 @@
                 <li class="nav-item">
                   <a class="nav-link" href="/register">Sign Up</a>
                 </li>
-              </ul>
-              <li class="nav-item">
+                <li class="nav-item">
                   <a class="nav-link" href="/danceclass-search">Search</a>
                 </li>
+              </ul>
+              
               <span class="navbar-text">
                 Navbar text with an inline element
               </span>
             </div>
     </nav>
+
+    <div class="container-fluid">
       <div class="row container text-center">
-        <h1>Dance</h1>
+        <h1>Dance Compass</h1>
       </div>
 
       <div class="homepage-images">
@@ -48,21 +50,21 @@
           <img src="\static\images\cc-image1.jpg" class="d-block w-100" alt="...">
             <div class="carousel-caption d-none d-md-block">
               <h5>Find dance classes where you are...</h5>
-              <p>Find dance classes where you are...</p>
+              <!-- <p>Find dance classes where you are...</p> -->
             </div>
         </div>
       <div class="carousel-item">
         <img src="\static\images\cc-image4.jpg" class="d-block w-100" alt="...">
           <div class="carousel-caption d-none d-md-block">
             <h5>...Or where you plan to be.</h5>
-              <p>...Or where you plan to be.</p>
+              <!-- <p>...Or where you plan to be.</p> -->
           </div>
       </div>
       <div class="carousel-item">
         <img src="\static\images\cc-image2.jpg" class="d-block w-100" alt="...">
           <div class="carousel-caption d-none d-md-block">
-            <h5>Search by city.</h5>
-              <p>Search by dance style.</p>
+            <h5>Search by city. Search by dance style.</h5>
+              <!-- <p>Search by dance style.</p> -->
           </div>
       </div> 
     </div>
@@ -95,3 +97,4 @@
 </div>
 
 {% endblock %}
+</body>

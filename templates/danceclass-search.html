@@ -18,37 +18,56 @@
           href="style.css">
 </head>
 
-<body>
-  <!-- Static navbar -->
-<!--   <nav class="navbar navbar-expand">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <button type="button"
-                class="navbar-toggle collapsed"
-                data-toggle="collapse"
-                data-target="#navbar"
-                aria-expanded="false"
-                aria-controls="navbar">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">Dance Compass</a>
-      </div>
-      <div id="navbar" class="navbar-collapse collapse">
-        <ul class="nav navbar-nav">
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="#">Home</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav> --> 
 
+<nav class="navbar navbar-expand-lg navbar-light fixed-top bg-light">
+      <a class="navbar-brand" href="#">Dance Compass</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                  <a class="nav-link" href="/">Home</a>
+                </li>
+                
+                  
+                  {% if session %}
+                    <li class="nav-item">
+                      <a href="/user-profile">My Profile</a>
+                    </li>
+                
+              
+                    <li class="nav-item">
+                      <a href="/logout">Logout</a>
+                    </li>
+                  {% else %}
+                    <li class="nav-item">
+                      <a href="/login">Login</a>
+                    </li>
+                  {% endif %}
+                  
+          
+                 <!--  <a class="nav-link" href="/login">Login</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/register">Sign Up</a>
+                </li> -->
+                <li class="nav-item">
+                  <a class="nav-link" href="/danceclass-search">Search</a>
+                </li>
+              </ul>
+            </div>
+              
+              <span class="navbar-text">
+                Let dance be your compass, your body your map, your soul your guide, and you will never get lost. 
+              </span>
+            </div>
+
+    </nav>
+<body>
  
 
-<div id="user-log">
+<!-- <div id="user-log">
       <table>
         <thead>
           <tr>
@@ -67,13 +86,13 @@
           </tr>
         </thead>
       </table> 
-</div>
+</div> -->
 
 <div class="container-fluid">
   <div class="row">
     <section class="left">
     <div class="text-center">
-      <h1>Searh For Dance Classes Now!</h1>
+      <h1>Search For Dance Classes Now!</h1>
     </div>
   </div>
 </div>
@@ -83,9 +102,7 @@
     <div class="col-sm text-left">
      <br>
      <br>
-     <br>
-     <br>
-     <br>
+     
     
       <form method="GET" action="/search-results">
 
@@ -127,15 +144,6 @@
     </section>
   </div>
 
-   <!-- <div class="col-sm">
-      Cute heading.
-      <br>
-      Type a bunch of cool stuff here to discuss searching for classes, 
-      looking for classes where you live, where you visit. Discuss the 
-      option to save the class if you want to access the info in the future.
-      Maybe add a picture of the US to signify searching anywhere. 
-
-    </div> -->
     <section class="right">
     <div class="col-sm">
     Dancing faces you toward heaven whichever direction you turn. -Terri Guillemets

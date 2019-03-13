@@ -13,9 +13,10 @@
 html, body {
   width: 100%;
   height: 100%;
-  overflow: hidden;
 }
  
+
+
 .navbar, .navbar-expand .navbar-brand, .navbar-expand .navbar-nav li a {
   
   /*background: rgba(0, 0, 0, 1);*/
@@ -24,6 +25,7 @@ html, body {
   color: #F1E9DA;
   font-family: 'Pacifico', cursive;
   font-size: 18px;
+
 }
 
 .left {
@@ -37,6 +39,7 @@ html, body {
   height: 100%;
   top: 50px;
   left: 0;
+  padding-top: 40px; 
 }
 
 .right{
@@ -50,4 +53,14 @@ html, body {
   width: 50%;
   height: 100%;
   top: 50px;
+  padding-top: 40px;
+}
+
+.login-form {
+    font-family: 'Pacifico', cursive;
+    color: white; 
+}
+.carousel-caption {
+    font-family: 'Pacifico';
+    color: gold; 
 }
