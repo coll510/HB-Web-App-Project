@@ -46,11 +46,6 @@
                   {% endif %}
                   
           
-                 <!--  <a class="nav-link" href="/login">Login</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="/register">Sign Up</a>
-                </li> -->
                 <li class="nav-item">
                   <a class="nav-link" href="/danceclass-search">Search</a>
                 </li>
@@ -65,37 +60,17 @@
     </nav>
 
 
-<!-- <div id="user-log">
-      <table>
-        <thead>
-          <tr>
-            {% if session %}
-              <th>
-                <a href="/user-profile">My Profile</a>
-              </th>
-              <th>
-                <a href="/logout">Logout</a>
-              </th>
-            {% else %}
-              <th>
-                <a href="/login">Login</a>
-              </th>
-            {% endif %}
-          </tr>
-        </thead>
-      </table> 
-</div> -->
 
 <body>
 
-<div class="container-fluid">
+<div class="container-fluid content">
   <div class="row">
-    <section class="left">
+    <section class="left col-6">
 
     <h1>My Saved Classes</h1>
 
       
-        <div class="col-sm text-left">
+        <div>
           <form action= '/tracked-classes', method = 'POST'>
 
             {% for user_class in users_saved_classes %}
@@ -124,15 +99,15 @@
         </div>
       </section>
 
-      <section class="right">
-        <div class="col-sm">
+      <section class="right col-6">
+        <div>
     There are shortcuts to happiness 
     <br>
     and dancing is one of them.
-       <div class="col-md-8">
+       <div class="image-container">
         <br>
 
-        <img src="\static\images\cc-image7.jpg" alt="Lights" style="width:150%">
+        <img src="\static\images\cc-image7.jpg" alt="Lights" class="image-fluid mx-auto">
     </div>
   </div>
        </section>

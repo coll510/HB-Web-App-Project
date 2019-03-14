@@ -65,30 +65,11 @@
     </nav>
 
 <body>
-<div id="user-log">
-      <table>
-        <thead>
-          <tr>
-            {% if session %}
-              <th>
-                <a href="/user-profile">My Profile</a>
-              </th>
-              <th>
-                <a href="/logout">Logout</a>
-              </th>
-            {% else %}
-              <th>
-                <a href="/login">Login</a>
-              </th>
-            {% endif %}
-          </tr>
-        </thead>
-      </table> 
-</div>
+
 
 <div class="container-fluid">
   <div class="row">
-    <section class="left">
+    <section class="left col-6">
 
 
     <h1>My Classes Attended</h1>
@@ -114,15 +95,15 @@
     {% endfor %}
   </section>
 
-  <section class="right">
-    <div class="col-sm">
+  <section class="right col-6">
+    <!-- <div class="col-sm"> -->
     Dancing with the feet is one thing,
     <br>
      but dancing with the heart is another.
-       <div class="col-md-8">
+       <div class="image-container">
         <br>
 
-        <img src="\static\images\cc-image3.jpg" alt="Lights" style="width:150%">
+        <img src="\static\images\cc-image3.jpg" alt="Lights" class="image-fluid mx-auto">
     </div>
   </div>
   
