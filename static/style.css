@@ -46,15 +46,16 @@ html, body {
   /*background: rgba(255, 230, 20, 0.65);*/
   /*height: 100%;*/
   line-height: 1.3;
-  /*position: absolute;*/
-  /*width: 50%;*/
-  /*height: 100%;*/
-  /*top: 50px;*/
-  /*left: 20;*/
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  top: 50px;
+  left: 20;
   padding-top: 40px; 
   font-family: 'Crimson Text', serif;
   font-style: italic;
   font-size: 15px;
+
 }
 
 .right{
@@ -64,11 +65,11 @@ html, body {
   /*background: rgba(0, 0, 0, 0.85);*/
   /*height: 100%;*/
   line-height: 1.3;
-  /*right: 0;*/
-  /*position: absolute;*/
-  /*width: 50%;*/
-  /*height: 100%;*/
-  /*top: 50px;*/
+  right: 0;
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  top: 50px;
   font-family: 'Crimson Text', serif;
   font-size: 28px;
   font-style: italic;
