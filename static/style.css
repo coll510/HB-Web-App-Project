@@ -22,12 +22,11 @@ html, body {
   /*background: rgba(0, 0, 0, 1);*/
   border: none;
   border-radius: 0;
-  color: #F0C808;
+  color: black;
   font-family: 'Crimson Text', serif;
   font-size: 20px;
-  font-weight: 1000;
-  font-style: bold; 
-  font-color: black;
+  font-weight: bold;  
+  background-color: #FFF7F8;
 
 }
 
@@ -35,8 +34,8 @@ html, body {
 .navbar-text {
     font-family: 'Crimson Text', serif;
     font-size: 18px;
-    font-style: bold, italic;
-    font-color: black;
+    font-weight: bold;
+    color: black;
 
 }
 
