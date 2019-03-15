@@ -1,21 +1,18 @@
 {% extends 'base.html' %}
-{% block content %}
 
-<head>
-  <style>
-
-      body {
+{% block style %}
+<style>
+body {
         background: url("static/images/bkgrnd2.jpg") no-repeat;
         background-size: cover;
         background-position-y: 20%;
-      }
-
-  </style>
-</head>
-
+}
+</style>
+{% endblock %}
+{% block content %}
 <div class="container reg-form h-100">
   <div class="row h-100">
-    <section class="col-4">
+    <section class="col-4 reg-form">
       <h1>Register</h1>
 
       <form action="register" class="reg-form" method="POST">
@@ -45,7 +42,7 @@
         </label>
         <input type="password" class="form-control" placeholder=Password name="password">
       </div>
-
+      <br>
       <div>
         <input class="btn" type="submit" value="Register">
       </div>

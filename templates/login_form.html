@@ -1,16 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
-
-<head>
-  <style>
-
-      body {
+{% block style %}
+<style>
+body {
         background: url("static/images/bkgrnd1.jpg") no-repeat;
-    background-size: cover;
-      }
-
-  </style>
-</head>
+        background-size: cover;        
+}
+</style>
+{% endblock %}
 
 
 <br>
@@ -37,7 +34,7 @@
     </div>
 
     <div>
-      <input type="submit" value="Log In">
+      <input class="btn" type="submit" value="Log In">
     </div>
 
 

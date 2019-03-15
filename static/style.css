@@ -9,11 +9,9 @@ body {
   overflow: auto;
 }
 
-/*.reg-form {
-  background: url("static/images/bkgrnd2.jpg") no-repeat;
-  background-size: cover;
-  background-position-y: 20%;
-}*/
+.dancers .row section.reg-form {
+  background: transparent !important;
+}
 
 .login-form {
   font-family: 'Crimson Text', serif;
