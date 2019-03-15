@@ -3,21 +3,19 @@
 {% block title %} My Profile! {% endblock %}
 
 {% block content %}
+<div class="container h-100">
+  <div class="row h-100">
+    <section class="col">
+      <h1>My Info </h1>
 
+      <canvas id="myChart" width="200" height="50"></canvas>
 
-<h1>My Info </h1>
-
-<canvas id="myChart" width="200" height="50"></canvas>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
-
-<script src="path/to/chartjs/dist/Chart.js"></script>
-
-
-
-
-
-<div id="user-log">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+      <script src="path/to/chartjs/dist/Chart.js"></script>
+    </section>
+  </div>
+  <div class="row">
+    <section class="col d-flex">
       <table>
         <thead>
           <tr>
@@ -33,22 +31,17 @@
           </tr>
         </thead>
       </table>   
+      <form method='GET' action= '/saved-classes'> 
+        <input type="submit" id="saved-classes" value="Saved Classes" />
+      </form>
+      <form method='GET' action= '/tracked-classes'> 
+        <input type="submit" id="tracked-classes" value="Classes Attended" />
+      </form>
+      <form method='GET' action= '/danceclass-search'> 
+        <input type="submit" id="class-search" value="Search Now">
+      </form>
+    </section>
 </div>
-  <div class="row">
-    <form method='GET' action= '/saved-classes'> 
-      <input type="submit" id="saved-classes" value="Saved Classes" />
-    </form>
-        <br>
-        <br>
-          <form method='GET' action= '/tracked-classes'> 
-            <input type="submit" id="tracked-classes" value="Classes Attended" />
-          </form>
-        <br>
-        <br>
-          <form method='GET' action= '/danceclass-search'> 
-            <input type="submit" id="class-search" value="Search Now" <p> Find a dance class now!</p>
-          </form>
-  </div>
 
 <script>
 var ctx = document.getElementById('myChart').getContext('2d');
