@@ -13,42 +13,44 @@
   </style>
 </head>
 
-<div class="reg-form">
-  <div class="container">
-    <div class="row">
-      <div class="col-sm text-left">
-        <h1>Register</h1>
-          <body class="text-center" >
-            <form action="register" class="reg-form" method="POST">
+<div class="container reg-form h-100">
+  <div class="row h-100">
+    <section class="col-4">
+      <h1>Register</h1>
 
-    <div>
-      <label>
-        Name
-        <input type="user_name" class="form-control" placeholder= "Name" name="name">
-      </label>
-    </div>
+      <form action="register" class="reg-form" method="POST">
+        <div>
+          <label for="username">
+            Name
+          </label>
+        <input
+          id="username"
+          type="text"
+          class="form-control"
+          placeholder="Name"
+          name="name"
+        >
+      </div>
 
-  <div>
-    <label>
-      Email
-      <input type="email" class="form-control" placeholder= "Email address" name="email">
-    </label>
-  </div>
+      <div>
+        <label>
+          Email
+        </label>
+        <input type="email" class="form-control" placeholder= "Email address" name="email">
+      </div>
 
-  <div>
-    <label>
-      Password
-      <input type="password" class="form-control" placeholder=Password name="password">
-    </label>
-  </div>
+      <div>
+        <label>
+          Password
+        </label>
+        <input type="password" class="form-control" placeholder=Password name="password">
+      </div>
 
-  <div>
-    <input type="submit" value="Register">
-  </div>
-
-</form>
+      <div>
+        <input class="btn" type="submit" value="Register">
+      </div>
+    </form>
+  </section>
 </div>
-</body>
-
 {% endblock %}
 

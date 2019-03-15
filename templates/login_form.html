@@ -6,42 +6,39 @@
 
       body {
         background: url("static/images/bkgrnd1.jpg") no-repeat;
-        background-size: cover;
+    background-size: cover;
       }
 
   </style>
 </head>
 
 
-
+<br>
+<br>
+<br>
 <div class="container">
   <div class="row">
     <div class="col-sm text-left">
+
       <div class="form">
 
-        <form action="/login" class="login-form" method="POST">
-          <h1>Login</h1>
-            <div>
-              <label>Email:
-                <input type="email" class="form-control" placeholder= "Name" name="email" required>
-              </label>
-            </div>
-
-            <div>
-              <label>Password:
-                <input type="password" class="form-control" placeholder= "Password" name="password" required>
-              </label>
-            </div>
-
-            <div>
-              <input type="submit" value="Log In">
-            </div>
-
-          </form>
-        </div>
-      </div>
+  <form action="/login" class="login-form" method="POST">
+    <h1>Login</h1>
+    <div>
+      <label>Email:
+        <input type="email" class="form-control" placeholder= "Name" name="email" required>
+      </label>
     </div>
-  </div> 
+
+    <div>
+      <label>Password:
+        <input type="password" class="form-control" placeholder= "Password" name="password" required>
+      </label>
+    </div>
+
+    <div>
+      <input type="submit" value="Log In">
+    </div>
 
 
 {% endblock %}

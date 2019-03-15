@@ -1,95 +1,76 @@
-
-/*@import url(https://fonts.googleapis.com/css?family=Roboto:300);*/
-
-
-#reg-form {
-    position: absolute;
-    left: 50px;
-    width: 25%;
-    height: 100%;
-   
-}
+@import url('https://fonts.googleapis.com/css?family=Crimson+Text');
 
 html, body {
-  width: 100%;
   height: 100%;
 }
- 
 
+body {
+  font-family: 'Crimson Text', serif;
+  overflow: auto;
+}
 
-.navbar, .navbar-expand .navbar-brand, .navbar-expand .navbar-nav li a {
-  
-  /*background: rgba(0, 0, 0, 1);*/
+/*.reg-form {
+  background: url("static/images/bkgrnd2.jpg") no-repeat;
+  background-size: cover;
+  background-position-y: 20%;
+}*/
+
+.login-form {
+  font-family: 'Crimson Text', serif;
+  color: white; 
+}
+
+.navbar {
+  background: #FFF7F8;
+}
+
+.dancers .row section {
+  padding: 3rem;
+  padding-top: calc(56px + 3rem);
+}
+
+.dancers .row section:first-child {
+  background: #F1E9DA;
+}
+
+.dancers .row section:last-child {
+  background: #F0C808;
+}
+
+.dancers .navbar-light .navbar-brand,
+.dancers .navbar-light .nav-item .nav-link,
+.dancers .navbar-light .navbar-text {
   border: none;
   border-radius: 0;
   color: black;
-  font-family: 'Crimson Text', serif;
-  font-size: 20px;
-  font-weight: bold;  
-  background-color: #FFF7F8;
-
+  font-weight: bold;
 }
 
-
-.navbar-text {
-    font-family: 'Crimson Text', serif;
-    font-size: 18px;
-    font-weight: bold;
-    color: black;
-
-}
-
-.left {
-  background: #F1E9DA;
-  /*opacity: .65;*/
-  /*background: rgba(255, 230, 20, 0.65);*/
-  /*height: 100%;*/
-  line-height: 1.3;
-  position: absolute;
-  width: 50%;
-  height: 100%;
-  top: 50px;
-  left: 20;
-  padding-top: 40px; 
-  font-family: 'Crimson Text', serif;
+.navbar-light .navbar-text {
   font-style: italic;
-  font-size: 15px;
-
+  color: black;
 }
 
-.right{
-  background: #F0C808;
-  padding-top: 60px;
-  /*opacity: .65;*/
-  /*background: rgba(0, 0, 0, 0.85);*/
-  /*height: 100%;*/
-  line-height: 1.3;
-  right: 0;
-  position: absolute;
-  width: 50%;
-  height: 100%;
-  top: 50px;
-  font-family: 'Crimson Text', serif;
-  font-size: 28px;
-  font-style: italic;
-  font-weight: 700;
-  text-align: center;
-}
-
-.login-form {
-    font-family: 'Crimson Text', serif;
-    color: white; 
-}
 .carousel-caption {
     font-family: 'Crimson Text', serif;
     color: gold; 
 }
 
-.image-container {
-    padding: 1rem;
-    text-align: center;
+.dancers blockquote {
+  font-style: italic;
+  font-size: 28px;
+  text-align: center;
 }
 
-img {
-    max-width: 100%;
+.dancers blockquote p {
+  margin: 0 auto;
+}
+
+.dancers .image-container {
+  padding: 1rem;
+  text-align: center;
+}
+
+.dancers img {
+  max-width: 100%;
 }

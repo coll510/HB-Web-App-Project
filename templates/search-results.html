@@ -3,183 +3,85 @@
 {% block title %} Dance Classes{% endblock %}
 
 {% block content %}
-
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Dance Compass</title>
-
-  <!-- Bootstrap -->
-  <link rel="stylesheet" 
-        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css?family=Crimson+Text" rel="stylesheet">
-  <!-- Stylesheet -->
-  <link rel="stylesheet"
-          href="style.css">
-</head>
-
-<nav class="navbar navbar-expand-lg navbar-light fixed-top ">
-      <a class="navbar-brand" href="#">Dance Compass</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-            <div class="collapse navbar-collapse" id="navbarText">
-              <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                  <a class="nav-link" href="/">Home</a>
-                </li>
-                
-                  
-                  {% if session %}
-                    <li class="nav-item">
-                      <a class="nav-link" href="/user-profile">My Profile</a>
-                    </li>
-                
-              
-                    <li class="nav-item">
-                      <a class="nav-link" href="/logout">Logout</a>
-                    </li>
-                  {% else %}
-                    <li class="nav-item">
-                      <a class="nav-link" href="/login">Login</a>
-                    </li>
-                  {% endif %}
-            
-                <li class="nav-item">
-                  <a class="nav-link" href="/danceclass-search">Search</a>
-                </li>
-              </ul>
-            </div>
-              
-              <span class="navbar-text">
-                Let dance be your compass, your body your map, your soul your guide, and you will never get lost. 
-              </span>
-            </div>
-
-    </nav>
-<!-- <div class="container-fluid">
-  <div class = "row">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">Some catchy tagline</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-            <div class="collapse navbar-collapse" id="navbarText">
-              <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                  <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="/user_info">My Profile</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="/logout">Logout</a>
-                </li>
-              </ul>
-              <li class="nav-item">
-                  <a class="nav-link" href="/danceclass-search">Search</a>
-                </li>
-              <span class="navbar-text">
-                Navbar text with an inline element
-              </span>
-            </div>
-    </nav> -->
-
-<!-- <div id="user-log">
-      <table>
-        <thead>
-          <tr>
-            {% if session %}
-              <th>
-                <a href="/user-profile">My Profile</a>
-              </th>
-              <th>
-                <a href="/logout">Logout</a>
-              </th>
-            {% else %}
-              <th>
-                <a href="/login">Login</a>
-              </th>
-            {% endif %}
-          </tr>
-        </thead>
-      </table>  -->  
-</div>
-
-<body>
-<div class="container-fluid">
-  <div class="row">
-    <section class="left">
-    <div class="col-sm text-left">
+<div class="container-fluid h-100">
+  <div class="row h-100">
+    <section class="col">
       <h1>Search Results</h1>
-        <ul class = "results"></ul>
-          <div id="confirm-save-msg"></div>
+      <p id="confirm-save-msg"></p>
+      <ul class="results" id="class-results">
+        {% for event in events %}
+          <li class="dance-class">
+            <h3>{{ event.name}}</h3>
+            <p>{{event.start_time}}</p>
+            <p>{{event.end_time}}</p>
+            <p>
+              <a href= {{event.url}} target="_blank"> 
+                Event link
+              </a>
+            </p>
+            <form
+              class="show-class"
+              action="/saved-classes" 
+              method="POST"
+              data-event-name="{{ event.name }}"
+              data-event-start=" {{ event.start_time}}"
+              data-event-end="{{ event.end_time}}"
+              data-event-url="{{ event.url }}"
+            > 
+              <input
+                type="hidden"
+                id="cl-name"
+                name="class_name"
+                value="{{event.name}}"
+              >
+              <input
+                type="hidden"
+                id="cl-start"
+                name="start_time"
+                value="{{event.start_time}}"
+              >
+              <input
+                type="hidden"
+                id="cl-end"
+                name="end_time"
+                value="{{event.end_time}}"
+              >
+              <input type="hidden" id="cl-url" name="url" value="{{event.url}}">
+              <input
+                type="submit"
+                name="{{event.name.text}}"
+                class="save-button btn"
+                value="Save Class"
+              >
+            </form>
+          </li>
+      {% endfor %}
+    </section>                
+    <section class="col">
+      <blockquote>
+        <p class="quote">
+          To dance is to be out of yourself.
+        </p>
+        <p>
+          Larger, more beautiful, more powerful...
+        </p>
+        <p>-Agnes De Mille</p>
+      </blockquote>
 
-
-            {% for event in events %}
-                <div id="class-results">
-                  <li id="name">{{ event.name}}
-                    <br>
-                      {{event.start_time}}
-                    <br>
-                      {{event.end_time}}
-                    <br>
-                    <br>
-                      <a href= {{event.url}} target="_blank"> 
-                        Event link</a></li>
-                    <br>
-                        <form
-                            class="show-class"
-                            action="/saved-classes" 
-                            method="POST"
-                            data-event-name="{{ event.name }}"
-                            data-event-start=" {{ event.start_time}}"
-                            data-event-end="{{ event.end_time}}"
-                            data-event-url="{{ event.url }}"
-                            > 
-                            <input
-                                type="hidden"
-                                id="cl-name"
-                                name="class_name"
-                                value ="{{event.name}}">
-                            <input type="hidden" id="cl-start" name="start_time" value={{event.start_time}}>
-                            <input type="hidden" id="cl-end" name="end_time" value ={{event.end_time}}>
-                            <input type="hidden" id="cl-url" name="url" value ="{{event.url}}">
-                            <input type="submit" name= {{event.name.text}} class="save-button" value="Save Class" />
-                        </form>
-                    <br>
-                    <br>
-                </div>
-
-           {% endfor %}
-                
-                  
-          
-   </div>
-           
+      <div class="image-container">
+        <img
+          src="\static\images\cc-image9.jpg"
+          alt="Lights"
+          class="image-fluid mx-auto"
+        >
       </div>
-       <section class="right">
-        <div class="col-sm">
-        To dance is to be out of yourself.
-        <br>
-         Larger, more beautiful, more powerful... -Agnes De Mille
-           <div class="image-container">
-            <br>
-
-            <img src="\static\images\cc-image9.jpg" alt="Lights" class="image-fluid mx-auto">
-      </div>
+    </section>
   </div>
-</section>
-
-    </div>
-  </div> 
-
-     
-
+</div> 
 {% endblock %}
 
 {% block script %}
 
-<script src="/static/save-class.js"></script>
+  <script src="/static/save-class.js"></script>
     
 {% endblock %}

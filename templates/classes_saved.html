@@ -3,71 +3,11 @@
 {% block title %} My Saved Classes! {% endblock %}
 
 {% block content %}
-
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Dance Compass</title>
-
-  <!-- Bootstrap -->
-  <link rel="stylesheet" 
-        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css?family=Crimson+Text" rel="stylesheet">
-  <!-- Stylesheet -->
-  <link rel="stylesheet"
-          href="style.css">
-</head>
-
-<nav class="navbar navbar-expand-lg navbar-light fixed-top ">
-      <a class="navbar-brand" href="#">Dance Compass</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-            <div class="collapse navbar-collapse" id="navbarText">
-              <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                  <a class="nav-link" href="/">Home</a>
-                </li>
-                
-                  
-                  {% if session %}
-                    <li class="nav-item">
-                      <a class="nav-link" href="/user-profile">My Profile</a>
-                    </li>
-                
-              
-                    <li class="nav-item">
-                      <a class="nav-link" href="/logout">Logout</a>
-                    </li>
-                  {% else %}
-                    <li class="nav-item">
-                      <a class="nav-link" href="/login">Login</a>
-                    </li>
-                  {% endif %}
-                  
-          
-                <li class="nav-item">
-                  <a class="nav-link" href="/danceclass-search">Search</a>
-                </li>
-              </ul>
-            </div>
-              
-              <span class="navbar-text">
-                Let dance be your compass, your body your map, your soul your guide, and you will never get lost. 
-              </span>
-            </div>
-
-    </nav>
-
-
-
-<body>
-
-<div class="container-fluid content">
-  <div class="row">
+<div class="container-fluid content h-100">
+  <div class="row h-100">
     <section class="left col-6">
 
-      <h1>My Saved Classes</h1>
+    <h1>My Saved Classes</h1>
 
       
         <div>
@@ -100,18 +40,18 @@
       </section>
 
       <section class="right col-6">
-        <div>
+        <blockquote>
           There are shortcuts to happiness 
           <br>
           and dancing is one of them.
-            <div class="image-container">
-              <br>
+        </blockquote>
+       <div class="image-container">
+        <br>
 
-              <img src="\static\images\cc-image7.jpg" alt="Lights" class="image-fluid mx-auto">
-            </div>
-        </div>
+        <img src="\static\images\cc-image7.jpg" alt="Lights" class="image-fluid mx-auto">
+    </div>
+  </div>
        </section>
       </div>
 </div>
 {% endblock %}
-</body>
