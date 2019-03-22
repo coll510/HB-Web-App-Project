@@ -35,7 +35,7 @@ Dance Compass moves the search for dance classes away from word of mouth and int
     
 ### About the Developer
 
-    Dance Compass was created by Key Doby and this is her first project. Learn more about her on https://www.linkedin.com/in/keyd.
+    Dance Compass was created by Key Doby and this is her first project. Learn more about her on [LinkedIn](https://www.linkedin.com/in/keyd).
 
 
 
