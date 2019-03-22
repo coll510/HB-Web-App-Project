@@ -30,12 +30,12 @@ Dance Compass moves the search for dance classes away from word of mouth and int
   ![alt text](https://github.com/kdoby/HB-Web-App-Project/blob/master/static/images/user-profile-screenshot.png?raw=true)
   
 ### To Do
-    - Web scrape and integrate additional API to add more classes to database
-    - Add Google API geocoding, geolocation, and markers 
+  - Web scrape and integrate additional API to add more classes to database
+  - Add Google API geocoding, geolocation, and markers 
     
 ### About the Developer
 
-    Dance Compass was created by Key Doby and this is her first project. Learn more about her on [LinkedIn](https://www.linkedin.com/in/keyd).
+  Dance Compass was created by Key Doby and this is her first project. Learn more about her on [LinkedIn](https://www.linkedin.com/in/keyd).
 
 
 
