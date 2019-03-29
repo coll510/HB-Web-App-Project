@@ -1,6 +1,6 @@
-# Dance Compass
+# 💃🏽 Dance Compass 💃🏽
 
-
+![alt text](https://github.com/kdoby/HB-Web-App-Project/blob/master/static/images/Login-screenshot.png?raw=true)
 
 Dance Compass moves the search for dance classes away from word of mouth and into the palm of your hand. Users can search for dance classes by city with options to filter by distance, style of dance, and when classes are happening. Users can save classes to their profile and keep track of the classes they've attended. 
 
